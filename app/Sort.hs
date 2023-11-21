@@ -17,6 +17,9 @@ sort xs = sample endOfSequence raspSort (prep xs) seqLength
     prep s = [maxBound] ++ s ++ [minBound]
 
 -- | Sorts a newline-separated collection of space-separated int8 sequences
+--
+-- Try it with
+--   cat exampleSort.txt | raskell-sort
 main :: IO ()
 main = do
   contents <- getContents
