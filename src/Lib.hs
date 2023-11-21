@@ -34,11 +34,11 @@ import Data.Int (Int8)
 import Data.Word (Word8)
 
 -- | Use a boolean sequence to select between two sequences.
--- Also known in Python RASP-L as "where", which is a restricted keyword in Haskell.
+-- Also known in Python RASP-L as "where", see `where'`.
 (?) :: [Bool] -> (Sequence, Sequence) -> Sequence
-bs ? (xs, ys) = seqMap (\xm ym -> if ym == 0 then xm else ym) xms yms
+bs ? (xs, ys) = seqMap (\xm ym -> if xm == 0 then ym else xm) xms yms
   where
-    xms = seqMap (\bt x -> if bt == 0 then x else 0) bts xs
+    xms = seqMap (\bt x -> if bt == 1 then x else 0) bts xs
     yms = seqMap (\bt y -> if bt == 0 then y else 0) bts ys
     bts = fromBoolSeq bs
 
