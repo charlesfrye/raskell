@@ -43,6 +43,16 @@ executables:
     dependencies:
     - raskell
 
+  raskell-sort:
+    main:                Sort
+    source-dirs:         app
+    ghc-options:
+    - -threaded
+    - -rtsopts
+    - -with-rtsopts=-N
+    dependencies:
+    - raskell
+
 tests:
   raskell-lib-test:
     main:                testLib.hs
