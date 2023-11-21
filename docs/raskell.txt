@@ -4,8 +4,9 @@
 
 -- | RASP-L in Haskell
 --   
---   Please see the README on GitHub at
---   <a>https://github.com/charlesfrye/raskell#readme</a>
+--   Implements the RASP-L language from "What Algorithms Can Transformers
+--   Learn" by Zhou et al. For more information, see the README at
+--   <a>https://github.com/charlesfrye/raskell#readme</a>.
 @package raskell
 @version 0.0.0.1
 

@@ -7,7 +7,7 @@ cabal-version: 2.2
 name:           raskell
 version:        0.0.0.1
 synopsis:       RASP-L in Haskell
-description:    Please see the README on GitHub at <https://github.com/charlesfrye/raskell#readme>
+description:    Implements the RASP-L language from "What Algorithms Can Transformers Learn" by Zhou et al. For more information, see the README at <https://github.com/charlesfrye/raskell#readme>.
 category:       nlp
 homepage:       https://github.com/charlesfrye/raskell#readme
 bug-reports:    https://github.com/charlesfrye/raskell/issues
