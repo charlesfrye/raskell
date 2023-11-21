@@ -1,0 +1,5 @@
+.stack-work/
+bench/*.html
+*~
+stack.yaml.lock
+dist-newstyle/
