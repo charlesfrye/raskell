@@ -1,9 +1,9 @@
 import Core
 import Criterion.Main
-import Lib (decode, gt)
+import Lib (gt, sample)
 
 sort :: Sequence -> Sequence
-sort xs = decode (maximum xs) raspSort (xs ++ [minBound]) (fromIntegral (length xs))
+sort xs = sample (maximum xs) raspSort (xs ++ [minBound]) (fromIntegral (length xs))
   where
     raspSort :: Sequence -> Sequence
     raspSort s = minKQV s s gt s

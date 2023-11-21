@@ -25,7 +25,7 @@ module Lib
     gt,
 
     -- * Sampling
-    decode,
+    sample,
   )
 where
 
@@ -101,8 +101,8 @@ lt = (<)
 gt :: Token -> Token -> Bool
 gt = (>)
 
--- | Greedily and autoregressively "decode" the output of a RASP-L program on a sequence.
-decode ::
+-- | Greedily and autoregressively sample the output of a RASP-L program on a sequence.
+sample ::
   -- | End of sequence token
   Token ->
   -- | RASP-L program to extend the sequence
@@ -112,7 +112,7 @@ decode ::
   -- | Number of steps to decode
   Word8 ->
   Sequence
-decode _ _ xs 0 = xs
-decode endOfSequence prog xs n
+sample _ _ xs 0 = xs
+sample endOfSequence prog xs n
   | last xs == endOfSequence = xs
-  | otherwise = decode endOfSequence prog (xs ++ [last $ prog xs]) (n - 1)
+  | otherwise = sample endOfSequence prog (xs ++ [last $ prog xs]) (n - 1)
