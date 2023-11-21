@@ -30,6 +30,15 @@
                 "kind": "build",
                 "isDefault": true
             }
+        },
+        {
+            "label": "docs",
+            "type": "shell",
+            "command": "stack build --haddock --haddock-arguments='-o docs/'",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
         }
     ]
 }
