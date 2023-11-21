@@ -238,7 +238,7 @@ select ::
   Keys ->
   -- | A collection of `Queries` to check against `Keys`
   Queries ->
-  -- | A boolean predicate that determines whether a `Key` and `Query` match
+  -- | A boolean predicate that determines whether a key and query match
   Predicate ->
   -- | A collection of boolean sequences indicating which pairs of `Keys` and `Queries` match
   Selector
