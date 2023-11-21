@@ -33,8 +33,9 @@ library:
   source-dirs: src
 
 executables:
-  raskell-exe:
-    main:                Main.hs
+
+  raskell-sort:
+    main:                Sort
     source-dirs:         app
     ghc-options:
     - -threaded
@@ -43,8 +44,8 @@ executables:
     dependencies:
     - raskell
 
-  raskell-sort:
-    main:                Sort
+  raskell-count:
+    main:                Count
     source-dirs:         app
     ghc-options:
     - -threaded
