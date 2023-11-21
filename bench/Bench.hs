@@ -3,7 +3,7 @@ import Criterion.Main
 import Lib (decode, gt)
 
 sort :: Sequence -> Sequence
-sort xs = decode (maximum xs) raspSort xs (fromIntegral (length xs))
+sort xs = decode (maximum xs) raspSort (xs ++ [minBound]) (fromIntegral (length xs))
   where
     raspSort :: Sequence -> Sequence
     raspSort s = minKQV s s gt s
