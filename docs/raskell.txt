@@ -157,6 +157,6 @@ geq :: Token -> Token -> Bool
 lt :: Token -> Token -> Bool
 gt :: Token -> Token -> Bool
 
--- | Greedily and autoregressively "decode" the output of a RASP-L program
---   on a sequence.
-decode :: Token -> (Sequence -> Sequence) -> Sequence -> Word8 -> Sequence
+-- | Greedily and autoregressively sample the output of a RASP-L program on
+--   a sequence.
+sample :: Token -> (Sequence -> Sequence) -> Sequence -> Word8 -> Sequence

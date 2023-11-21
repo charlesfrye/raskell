@@ -25,7 +25,7 @@
 </span><span id="line-25"></span><span>    </span><span class="annot"><a href="Lib.html#gt"><span class="hs-identifier">gt</span></a></span><span class="hs-special">,</span><span>
 </span><span id="line-26"></span><span>
 </span><span id="line-27"></span><span>    </span><span class="annot"><span class="hs-comment">-- * Sampling</span></span><span>
-</span><span id="line-28"></span><span>    </span><span class="annot"><a href="Lib.html#decode"><span class="hs-identifier">decode</span></a></span><span class="hs-special">,</span><span>
+</span><span id="line-28"></span><span>    </span><span class="annot"><a href="Lib.html#sample"><span class="hs-identifier">sample</span></a></span><span class="hs-special">,</span><span>
 </span><span id="line-29"></span><span>  </span><span class="hs-special">)</span><span>
 </span><span id="line-30"></span><span class="hs-keyword">where</span><span>
 </span><span id="line-31"></span><span>
@@ -282,8 +282,8 @@ forall a. Ord a =&gt; a -&gt; a -&gt; Bool
 forall a. Ord a =&gt; a -&gt; a -&gt; Bool
 </span><span class="hs-operator hs-var">(&gt;)</span></span><span>
 </span><span id="line-103"></span><span>
-</span><span id="line-104"></span><span class="annot"><span class="hs-comment">-- | Greedily and autoregressively &quot;decode&quot; the output of a RASP-L program on a sequence.</span></span><span>
-</span><span id="line-105"></span><span class="annot"><a href="Lib.html#decode"><span class="hs-identifier hs-type">decode</span></a></span><span> </span><span class="hs-glyph">::</span><span>
+</span><span id="line-104"></span><span class="annot"><span class="hs-comment">-- | Greedily and autoregressively sample the output of a RASP-L program on a sequence.</span></span><span>
+</span><span id="line-105"></span><span class="annot"><a href="Lib.html#sample"><span class="hs-identifier hs-type">sample</span></a></span><span> </span><span class="hs-glyph">::</span><span>
 </span><span id="line-106"></span><span>  </span><span class="annot"><span class="hs-comment">-- | End of sequence token</span></span><span>
 </span><span id="line-107"></span><span>  </span><span class="annot"><a href="Core.html#Token"><span class="hs-identifier hs-type">Token</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span>
 </span><span id="line-108"></span><span>  </span><span class="annot"><span class="hs-comment">-- | RASP-L program to extend the sequence</span></span><span>
@@ -293,14 +293,14 @@ forall a. Ord a =&gt; a -&gt; a -&gt; Bool
 </span><span id="line-112"></span><span>  </span><span class="annot"><span class="hs-comment">-- | Number of steps to decode</span></span><span>
 </span><span id="line-113"></span><span>  </span><span class="annot"><span class="hs-identifier hs-type">Word8</span></span><span> </span><span class="hs-glyph">-&gt;</span><span>
 </span><span id="line-114"></span><span>  </span><span class="annot"><a href="Core.html#Sequence"><span class="hs-identifier hs-type">Sequence</span></a></span><span>
-</span><span id="line-115"></span><span id="decode"><span class="annot"><span class="annottext">decode :: Token -&gt; (Sequence -&gt; Sequence) -&gt; Sequence -&gt; Word8 -&gt; Sequence
-</span><a href="Lib.html#decode"><span class="hs-identifier hs-var hs-var">decode</span></a></span></span><span> </span><span class="annot"><span class="annottext">Token
+</span><span id="line-115"></span><span id="sample"><span class="annot"><span class="annottext">sample :: Token -&gt; (Sequence -&gt; Sequence) -&gt; Sequence -&gt; Word8 -&gt; Sequence
+</span><a href="Lib.html#sample"><span class="hs-identifier hs-var hs-var">sample</span></a></span></span><span> </span><span class="annot"><span class="annottext">Token
 </span><span class="hs-identifier">_</span></span><span> </span><span class="annot"><span class="annottext">Sequence -&gt; Sequence
 </span><span class="hs-identifier">_</span></span><span> </span><span id="local-6989586621679029026"><span class="annot"><span class="annottext">Sequence
 </span><a href="#local-6989586621679029026"><span class="hs-identifier hs-var">xs</span></a></span></span><span> </span><span class="annot"><span class="annottext">Word8
 </span><span class="hs-number">0</span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Sequence
 </span><a href="#local-6989586621679029026"><span class="hs-identifier hs-var">xs</span></a></span><span>
-</span><span id="line-116"></span><span class="annot"><a href="Lib.html#decode"><span class="hs-identifier hs-var">decode</span></a></span><span> </span><span id="local-6989586621679029027"><span class="annot"><span class="annottext">Token
+</span><span id="line-116"></span><span class="annot"><a href="Lib.html#sample"><span class="hs-identifier hs-var">sample</span></a></span><span> </span><span id="local-6989586621679029027"><span class="annot"><span class="annottext">Token
 </span><a href="#local-6989586621679029027"><span class="hs-identifier hs-var">endOfSequence</span></a></span></span><span> </span><span id="local-6989586621679029028"><span class="annot"><span class="annottext">Sequence -&gt; Sequence
 </span><a href="#local-6989586621679029028"><span class="hs-identifier hs-var">prog</span></a></span></span><span> </span><span id="local-6989586621679029029"><span class="annot"><span class="annottext">Sequence
 </span><a href="#local-6989586621679029029"><span class="hs-identifier hs-var">xs</span></a></span></span><span> </span><span id="local-6989586621679029030"><span class="annot"><span class="annottext">Word8
@@ -315,7 +315,7 @@ forall a. Eq a =&gt; a -&gt; a -&gt; Bool
 </span><a href="#local-6989586621679029029"><span class="hs-identifier hs-var">xs</span></a></span><span>
 </span><span id="line-118"></span><span>  </span><span class="hs-glyph">|</span><span> </span><span class="annot"><span class="annottext">Bool
 </span><span class="hs-identifier hs-var">otherwise</span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Token -&gt; (Sequence -&gt; Sequence) -&gt; Sequence -&gt; Word8 -&gt; Sequence
-</span><a href="Lib.html#decode"><span class="hs-identifier hs-var">decode</span></a></span><span> </span><span class="annot"><span class="annottext">Token
+</span><a href="Lib.html#sample"><span class="hs-identifier hs-var">sample</span></a></span><span> </span><span class="annot"><span class="annottext">Token
 </span><a href="#local-6989586621679029027"><span class="hs-identifier hs-var">endOfSequence</span></a></span><span> </span><span class="annot"><span class="annottext">Sequence -&gt; Sequence
 </span><a href="#local-6989586621679029028"><span class="hs-identifier hs-var">prog</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Sequence
 </span><a href="#local-6989586621679029029"><span class="hs-identifier hs-var">xs</span></a></span><span> </span><span class="annot"><span class="annottext">Sequence -&gt; Sequence -&gt; Sequence
