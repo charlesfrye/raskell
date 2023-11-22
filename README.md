@@ -6,7 +6,7 @@ by Zhou et al. in Haskell.
 
 Includes the entire RASP-L Core from Listing 2 (`src/Core.hs`),
 some of the RASP-L Standard Library from Listing 3 (`src/Lib.hs`),
-and some sample programs (in `app/`)
+and some sample programs (in `app/`).
 
 RASP-L is a domain-specific language that models the behavior of Transformers
 on algorithmic tasks.
