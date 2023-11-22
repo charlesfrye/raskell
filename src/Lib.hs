@@ -6,19 +6,18 @@
 module Lib
   ( -- * Logical Operations
     (?),
-    where',
     shiftRight,
     toBool,
     mask,
 
-    -- * Running Aggregation
+    -- * Running Aggregations
     cumSum,
     maximum',
     minimum',
     argmax,
     argmin,
 
-    -- * Token Comparison
+    -- * Token Comparisons
     leq,
     geq,
     lt,
@@ -26,6 +25,10 @@ module Lib
 
     -- * Sampling
     sample,
+
+    -- * Compatibility
+    where',
+    sample_autoregressive,
   )
 where
 
@@ -49,45 +52,64 @@ where' :: [Bool] -> Sequence -> Sequence -> Sequence
 where' bs xs ys = bs ? (xs, ys)
 
 -- | Shift a sequence to the right by a given number of elements,
--- filling the vacated positions with the provided token.
-shiftRight :: Token -> Int8 -> Sequence -> Sequence
+-- filling the vacated positions with the provided `Token`.
+shiftRight ::
+  -- | Filler `Token`
+  Token ->
+  -- | Number of positions to shift
+  Int8 ->
+  -- | Input `Sequence`
+  Sequence ->
+  Sequence
 shiftRight filler n xs = kqv filler Mean shiftedIdxs idxs (==) xs
   where
     shiftedIdxs = map (+ n) idxs
     idxs = indices xs
 
+-- | Maps tokens onto bools using Python's "truthiness" rules.
 toBool :: Token -> Bool
 toBool x
   | x == 0 = False
   | otherwise = True
 
+-- | Converts a list of bools to a sequence of tokens.
 fromBoolSeq :: [Bool] -> Sequence
 fromBoolSeq = map fromBool
 
+-- | Computes the cumulative sum of a boolean sequence.
 cumSum :: [Bool] -> Sequence
 cumSum bs = selWidth (selectCausal bTokens bTokens first)
   where
     bTokens = fromBoolSeq bs
     first x _ = toBool x
 
+-- | Masks a `Sequence` with a boolean sequence, using the provided `Token` as the mask.
 mask :: Token -> [Bool] -> Sequence -> Sequence
-mask filler bs xs = bs ? (xs, xs `filledWith` filler)
+mask maskT bs xs = bs ? (xs, xs `filledWith` maskT)
 
+-- | Computes the running maximum of a `Sequence`.
 maximum' :: Sequence -> Sequence
 maximum' xs = maxKQV xs xs always xs
   where
     always _ _ = True
 
+-- | Computes the running minimum of a `Sequence`.
 minimum' :: Sequence -> Sequence
-minimum' xs = map negate $ maximum' $ map negate xs
+minimum' xs = minKQV xs xs always xs
+  where
+    always _ _ = True
 
+-- | Computes the indices of the running maximum values in a `Sequence`.
 argmax :: Sequence -> Sequence
-argmax xs = maxKQV maxs xs (==) (indicesOf xs)
+argmax xs = maxKQV xs maxs (==) (indicesOf xs)
   where
     maxs = maximum' xs
 
+-- | Computes the indices of the running minimum values in a `Sequence`.
 argmin :: Sequence -> Sequence
-argmin xs = argmax $ map negate xs
+argmin xs = maxKQV xs mins (==) (indicesOf xs)
+  where
+    mins = minimum' xs
 
 leq :: Token -> Token -> Bool
 leq = (<=)
@@ -107,12 +129,19 @@ sample ::
   Token ->
   -- | RASP-L program to extend the sequence
   (Sequence -> Sequence) ->
-  -- | Initial sequence
+  -- | Initial/prompt sequence
   Sequence ->
   -- | Number of steps to decode
   Word8 ->
+  -- | Output (including prompt)
   Sequence
 sample _ _ xs 0 = xs
 sample endOfSequence prog xs n
   | last xs == endOfSequence = xs
   | otherwise = sample endOfSequence prog (xs ++ [last $ prog xs]) (n - 1)
+
+-- | Greedily and autoregressively sample the output of a RASP-L program on a sequence.
+--
+-- Provided for compatibility with Listing 3.
+sample_autoregressive :: Token -> (Sequence -> Sequence) -> Sequence -> Word8 -> Sequence
+sample_autoregressive = sample

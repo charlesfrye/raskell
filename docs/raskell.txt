@@ -134,7 +134,7 @@ select :: Bool -> Keys -> Queries -> Predicate -> Selector
 module Lib
 
 -- | Use a boolean sequence to select between two sequences. Also known in
---   Python RASP-L as "where", which is a restricted keyword in Haskell.
+--   Python RASP-L as "where", see <a>where'</a>.
 (?) :: [Bool] -> (Sequence, Sequence) -> Sequence
 
 -- | Use a boolean sequence to select between two sequences. Provided for
@@ -143,7 +143,7 @@ module Lib
 where' :: [Bool] -> Sequence -> Sequence -> Sequence
 
 -- | Shift a sequence to the right by a given number of elements, filling
---   the vacated positions with the provided token.
+--   the vacated positions with the provided <a>Token</a>.
 shiftRight :: Token -> Int8 -> Sequence -> Sequence
 toBool :: Token -> Bool
 mask :: Token -> [Bool] -> Sequence -> Sequence
