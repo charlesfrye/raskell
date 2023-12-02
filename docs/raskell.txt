@@ -15,7 +15,7 @@
 --   
 --   It is based on Listing 2 of "What Algorithms Can Transformers Learn",
 --   <a>https://arxiv.org/abs/2310.16028</a>, by Zhou et al.
-module Core
+module RaskellCore
 
 -- | A <a>Token</a> in a <a>Sequence</a> is a small integer. RASP-L uses
 --   <a>Int8</a> to ensure all maps of type <a>Token</a> -&gt; <a>Token</a>
@@ -131,26 +131,38 @@ select :: Bool -> Keys -> Queries -> Predicate -> Selector
 --   
 --   It is based on Listing 3 of "What Algorithms Can Transformers Learn",
 --   <a>https://arxiv.org/abs/2310.16028</a>, by Zhou et al.
-module Lib
+module RaskellLib
 
 -- | Use a boolean sequence to select between two sequences. Also known in
 --   Python RASP-L as "where", see <a>where'</a>.
 (?) :: [Bool] -> (Sequence, Sequence) -> Sequence
 
--- | Use a boolean sequence to select between two sequences. Provided for
---   compatibility with Listing 3, but with an apostrophe to avoid a name
---   clash with the "where" keyword.
-where' :: [Bool] -> Sequence -> Sequence -> Sequence
-
 -- | Shift a sequence to the right by a given number of elements, filling
 --   the vacated positions with the provided <a>Token</a>.
 shiftRight :: Token -> Int8 -> Sequence -> Sequence
+
+-- | Maps tokens onto bools using Python's "truthiness" rules.
 toBool :: Token -> Bool
+
+-- | Masks a <a>Sequence</a> with a boolean sequence, using the provided
+--   <a>Token</a> as the mask.
 mask :: Token -> [Bool] -> Sequence -> Sequence
+
+-- | Computes the cumulative sum of a boolean sequence.
 cumSum :: [Bool] -> Sequence
+
+-- | Computes the running maximum of a <a>Sequence</a>.
 maximum' :: Sequence -> Sequence
+
+-- | Computes the running minimum of a <a>Sequence</a>.
 minimum' :: Sequence -> Sequence
+
+-- | Computes the indices of the running maximum values in a
+--   <a>Sequence</a>.
 argmax :: Sequence -> Sequence
+
+-- | Computes the indices of the running minimum values in a
+--   <a>Sequence</a>.
 argmin :: Sequence -> Sequence
 leq :: Token -> Token -> Bool
 geq :: Token -> Token -> Bool
@@ -160,3 +172,14 @@ gt :: Token -> Token -> Bool
 -- | Greedily and autoregressively sample the output of a RASP-L program on
 --   a sequence.
 sample :: Token -> (Sequence -> Sequence) -> Sequence -> Word8 -> Sequence
+
+-- | Use a boolean sequence to select between two sequences. Provided for
+--   compatibility with Listing 3, but with an apostrophe to avoid a name
+--   clash with the "where" keyword.
+where' :: [Bool] -> Sequence -> Sequence -> Sequence
+
+-- | Greedily and autoregressively sample the output of a RASP-L program on
+--   a sequence.
+--   
+--   Provided for compatibility with Listing 3.
+sample_autoregressive :: Token -> (Sequence -> Sequence) -> Sequence -> Word8 -> Sequence

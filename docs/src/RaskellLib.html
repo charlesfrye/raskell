@@ -1,0 +1,365 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><link rel="stylesheet" type="text/css" href="style.css" /><script type="text/javascript" src="highlight.js"></script></head><body><pre><span class="hs-comment">-- | This module provides convenience functions built from the core of the RASP-L language.</span><span>
+</span><span id="line-2"></span><span class="hs-comment">--</span><span>
+</span><span id="line-3"></span><span class="hs-comment">-- It is based on Listing 3 of</span><span>
+</span><span id="line-4"></span><span class="hs-comment">-- &quot;What Algorithms Can Transformers Learn&quot;, https://arxiv.org/abs/2310.16028,</span><span>
+</span><span id="line-5"></span><span class="hs-comment">-- by Zhou et al.</span><span>
+</span><span id="line-6"></span><span class="hs-keyword">module</span><span> </span><span class="hs-identifier">RaskellLib</span><span>
+</span><span id="line-7"></span><span>  </span><span class="hs-special">(</span><span> </span><span class="annot"><span class="hs-comment">-- * Logical Operations</span></span><span>
+</span><span id="line-8"></span><span>    </span><span class="annot"><a href="RaskellLib.html#%3F"><span class="hs-operator">(?)</span></a></span><span class="hs-special">,</span><span>
+</span><span id="line-9"></span><span>    </span><span class="annot"><a href="RaskellLib.html#shiftRight"><span class="hs-identifier">shiftRight</span></a></span><span class="hs-special">,</span><span>
+</span><span id="line-10"></span><span>    </span><span class="annot"><a href="RaskellLib.html#toBool"><span class="hs-identifier">toBool</span></a></span><span class="hs-special">,</span><span>
+</span><span id="line-11"></span><span>    </span><span class="annot"><a href="RaskellLib.html#mask"><span class="hs-identifier">mask</span></a></span><span class="hs-special">,</span><span>
+</span><span id="line-12"></span><span>
+</span><span id="line-13"></span><span>    </span><span class="annot"><span class="hs-comment">-- * Running Aggregations</span></span><span>
+</span><span id="line-14"></span><span>    </span><span class="annot"><a href="RaskellLib.html#cumSum"><span class="hs-identifier">cumSum</span></a></span><span class="hs-special">,</span><span>
+</span><span id="line-15"></span><span>    </span><span class="annot"><a href="RaskellLib.html#maximum%27"><span class="hs-identifier">maximum'</span></a></span><span class="hs-special">,</span><span>
+</span><span id="line-16"></span><span>    </span><span class="annot"><a href="RaskellLib.html#minimum%27"><span class="hs-identifier">minimum'</span></a></span><span class="hs-special">,</span><span>
+</span><span id="line-17"></span><span>    </span><span class="annot"><a href="RaskellLib.html#argmax"><span class="hs-identifier">argmax</span></a></span><span class="hs-special">,</span><span>
+</span><span id="line-18"></span><span>    </span><span class="annot"><a href="RaskellLib.html#argmin"><span class="hs-identifier">argmin</span></a></span><span class="hs-special">,</span><span>
+</span><span id="line-19"></span><span>
+</span><span id="line-20"></span><span>    </span><span class="annot"><span class="hs-comment">-- * Token Comparisons</span></span><span>
+</span><span id="line-21"></span><span>    </span><span class="annot"><a href="RaskellLib.html#leq"><span class="hs-identifier">leq</span></a></span><span class="hs-special">,</span><span>
+</span><span id="line-22"></span><span>    </span><span class="annot"><a href="RaskellLib.html#geq"><span class="hs-identifier">geq</span></a></span><span class="hs-special">,</span><span>
+</span><span id="line-23"></span><span>    </span><span class="annot"><a href="RaskellLib.html#lt"><span class="hs-identifier">lt</span></a></span><span class="hs-special">,</span><span>
+</span><span id="line-24"></span><span>    </span><span class="annot"><a href="RaskellLib.html#gt"><span class="hs-identifier">gt</span></a></span><span class="hs-special">,</span><span>
+</span><span id="line-25"></span><span>
+</span><span id="line-26"></span><span>    </span><span class="annot"><span class="hs-comment">-- * Sampling</span></span><span>
+</span><span id="line-27"></span><span>    </span><span class="annot"><a href="RaskellLib.html#sample"><span class="hs-identifier">sample</span></a></span><span class="hs-special">,</span><span>
+</span><span id="line-28"></span><span>
+</span><span id="line-29"></span><span>    </span><span class="annot"><span class="hs-comment">-- * Compatibility</span></span><span>
+</span><span id="line-30"></span><span>    </span><span class="annot"><a href="RaskellLib.html#where%27"><span class="hs-identifier">where'</span></a></span><span class="hs-special">,</span><span>
+</span><span id="line-31"></span><span>    </span><span class="annot"><a href="RaskellLib.html#sample_autoregressive"><span class="hs-identifier">sample_autoregressive</span></a></span><span class="hs-special">,</span><span>
+</span><span id="line-32"></span><span>  </span><span class="hs-special">)</span><span>
+</span><span id="line-33"></span><span class="hs-keyword">where</span><span>
+</span><span id="line-34"></span><span>
+</span><span id="line-35"></span><span class="hs-keyword">import</span><span> </span><span class="annot"><span class="hs-identifier">Data.Int</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier">Int8</span></span><span class="hs-special">)</span><span>
+</span><span id="line-36"></span><span class="hs-keyword">import</span><span> </span><span class="annot"><span class="hs-identifier">Data.Word</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier">Word8</span></span><span class="hs-special">)</span><span>
+</span><span id="line-37"></span><span class="hs-keyword">import</span><span> </span><span class="annot"><a href="RaskellCore.html"><span class="hs-identifier">RaskellCore</span></a></span><span>
+</span><span id="line-38"></span><span>
+</span><span id="line-39"></span><span class="hs-comment">-- | Use a boolean sequence to select between two sequences.</span><span>
+</span><span id="line-40"></span><span class="hs-comment">-- Also known in Python RASP-L as &quot;where&quot;, see `where'`.</span><span>
+</span><span id="line-41"></span><span class="annot"><a href="RaskellLib.html#%3F"><span class="hs-operator hs-type">(?)</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="hs-special">[</span><span class="annot"><span class="hs-identifier hs-type">Bool</span></span><span class="hs-special">]</span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="hs-special">(</span><span class="annot"><a href="RaskellCore.html#Sequence"><span class="hs-identifier hs-type">Sequence</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><a href="RaskellCore.html#Sequence"><span class="hs-identifier hs-type">Sequence</span></a></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><a href="RaskellCore.html#Sequence"><span class="hs-identifier hs-type">Sequence</span></a></span><span>
+</span><span id="line-42"></span><span id="local-6989586621679029063"><span class="annot"><span class="annottext">[Bool]
+</span><a href="#local-6989586621679029063"><span class="hs-identifier hs-var">bs</span></a></span></span><span> </span><span id="%3F"><span class="annot"><span class="annottext">? :: [Bool] -&gt; (Sequence, Sequence) -&gt; Sequence
+</span><a href="RaskellLib.html#%3F"><span class="hs-operator hs-var hs-var">?</span></a></span></span><span> </span><span class="hs-special">(</span><span id="local-6989586621679029064"><span class="annot"><span class="annottext">Sequence
+</span><a href="#local-6989586621679029064"><span class="hs-identifier hs-var">xs</span></a></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679029065"><span class="annot"><span class="annottext">Sequence
+</span><a href="#local-6989586621679029065"><span class="hs-identifier hs-var">ys</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">(Token -&gt; Token -&gt; Token) -&gt; Sequence -&gt; Sequence -&gt; Sequence
+</span><a href="RaskellCore.html#seqMap"><span class="hs-identifier hs-var">seqMap</span></a></span><span> </span><span class="hs-special">(</span><span class="hs-glyph">\</span><span id="local-6989586621679029067"><span class="annot"><span class="annottext">Token
+</span><a href="#local-6989586621679029067"><span class="hs-identifier hs-var">xm</span></a></span></span><span> </span><span id="local-6989586621679029068"><span class="annot"><span class="annottext">Token
+</span><a href="#local-6989586621679029068"><span class="hs-identifier hs-var">ym</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="hs-keyword">if</span><span> </span><span class="annot"><span class="annottext">Token
+</span><a href="#local-6989586621679029067"><span class="hs-identifier hs-var">xm</span></a></span><span> </span><span class="annot"><span class="annottext">Token -&gt; Token -&gt; Bool
+forall a. Eq a =&gt; a -&gt; a -&gt; Bool
+</span><span class="hs-operator hs-var">==</span></span><span> </span><span class="annot"><span class="annottext">Token
+</span><span class="hs-number">0</span></span><span> </span><span class="hs-keyword">then</span><span> </span><span class="annot"><span class="annottext">Token
+</span><a href="#local-6989586621679029068"><span class="hs-identifier hs-var">ym</span></a></span><span> </span><span class="hs-keyword">else</span><span> </span><span class="annot"><span class="annottext">Token
+</span><a href="#local-6989586621679029067"><span class="hs-identifier hs-var">xm</span></a></span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">Sequence
+</span><a href="#local-6989586621679029069"><span class="hs-identifier hs-var">xms</span></a></span><span> </span><span class="annot"><span class="annottext">Sequence
+</span><a href="#local-6989586621679029070"><span class="hs-identifier hs-var">yms</span></a></span><span>
+</span><span id="line-43"></span><span>  </span><span class="hs-keyword">where</span><span>
+</span><span id="line-44"></span><span>    </span><span id="local-6989586621679029069"><span class="annot"><span class="annottext">xms :: Sequence
+</span><a href="#local-6989586621679029069"><span class="hs-identifier hs-var hs-var">xms</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">(Token -&gt; Token -&gt; Token) -&gt; Sequence -&gt; Sequence -&gt; Sequence
+</span><a href="RaskellCore.html#seqMap"><span class="hs-identifier hs-var">seqMap</span></a></span><span> </span><span class="hs-special">(</span><span class="hs-glyph">\</span><span id="local-6989586621679029074"><span class="annot"><span class="annottext">Token
+</span><a href="#local-6989586621679029074"><span class="hs-identifier hs-var">bt</span></a></span></span><span> </span><span id="local-6989586621679029075"><span class="annot"><span class="annottext">Token
+</span><a href="#local-6989586621679029075"><span class="hs-identifier hs-var">x</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="hs-keyword">if</span><span> </span><span class="annot"><span class="annottext">Token
+</span><a href="#local-6989586621679029074"><span class="hs-identifier hs-var">bt</span></a></span><span> </span><span class="annot"><span class="annottext">Token -&gt; Token -&gt; Bool
+forall a. Eq a =&gt; a -&gt; a -&gt; Bool
+</span><span class="hs-operator hs-var">==</span></span><span> </span><span class="annot"><span class="annottext">Token
+</span><span class="hs-number">1</span></span><span> </span><span class="hs-keyword">then</span><span> </span><span class="annot"><span class="annottext">Token
+</span><a href="#local-6989586621679029075"><span class="hs-identifier hs-var">x</span></a></span><span> </span><span class="hs-keyword">else</span><span> </span><span class="annot"><span class="annottext">Token
+</span><span class="hs-number">0</span></span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">Sequence
+</span><a href="#local-6989586621679029076"><span class="hs-identifier hs-var">bts</span></a></span><span> </span><span class="annot"><span class="annottext">Sequence
+</span><a href="#local-6989586621679029064"><span class="hs-identifier hs-var">xs</span></a></span><span>
+</span><span id="line-45"></span><span>    </span><span id="local-6989586621679029070"><span class="annot"><span class="annottext">yms :: Sequence
+</span><a href="#local-6989586621679029070"><span class="hs-identifier hs-var hs-var">yms</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">(Token -&gt; Token -&gt; Token) -&gt; Sequence -&gt; Sequence -&gt; Sequence
+</span><a href="RaskellCore.html#seqMap"><span class="hs-identifier hs-var">seqMap</span></a></span><span> </span><span class="hs-special">(</span><span class="hs-glyph">\</span><span id="local-6989586621679029080"><span class="annot"><span class="annottext">Token
+</span><a href="#local-6989586621679029080"><span class="hs-identifier hs-var">bt</span></a></span></span><span> </span><span id="local-6989586621679029081"><span class="annot"><span class="annottext">Token
+</span><a href="#local-6989586621679029081"><span class="hs-identifier hs-var">y</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="hs-keyword">if</span><span> </span><span class="annot"><span class="annottext">Token
+</span><a href="#local-6989586621679029080"><span class="hs-identifier hs-var">bt</span></a></span><span> </span><span class="annot"><span class="annottext">Token -&gt; Token -&gt; Bool
+forall a. Eq a =&gt; a -&gt; a -&gt; Bool
+</span><span class="hs-operator hs-var">==</span></span><span> </span><span class="annot"><span class="annottext">Token
+</span><span class="hs-number">0</span></span><span> </span><span class="hs-keyword">then</span><span> </span><span class="annot"><span class="annottext">Token
+</span><a href="#local-6989586621679029081"><span class="hs-identifier hs-var">y</span></a></span><span> </span><span class="hs-keyword">else</span><span> </span><span class="annot"><span class="annottext">Token
+</span><span class="hs-number">0</span></span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">Sequence
+</span><a href="#local-6989586621679029076"><span class="hs-identifier hs-var">bts</span></a></span><span> </span><span class="annot"><span class="annottext">Sequence
+</span><a href="#local-6989586621679029065"><span class="hs-identifier hs-var">ys</span></a></span><span>
+</span><span id="line-46"></span><span>    </span><span id="local-6989586621679029076"><span class="annot"><span class="annottext">bts :: Sequence
+</span><a href="#local-6989586621679029076"><span class="hs-identifier hs-var hs-var">bts</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">[Bool] -&gt; Sequence
+</span><a href="RaskellLib.html#fromBoolSeq"><span class="hs-identifier hs-var">fromBoolSeq</span></a></span><span> </span><span class="annot"><span class="annottext">[Bool]
+</span><a href="#local-6989586621679029063"><span class="hs-identifier hs-var">bs</span></a></span><span>
+</span><span id="line-47"></span><span>
+</span><span id="line-48"></span><span class="hs-comment">-- | Use a boolean sequence to select between two sequences.</span><span>
+</span><span id="line-49"></span><span class="hs-comment">-- Provided for compatibility with Listing 3, but with</span><span>
+</span><span id="line-50"></span><span class="hs-comment">-- an apostrophe to avoid a name clash with the &quot;where&quot; keyword.</span><span>
+</span><span id="line-51"></span><span class="annot"><a href="RaskellLib.html#where%27"><span class="hs-identifier hs-type">where'</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="hs-special">[</span><span class="annot"><span class="hs-identifier hs-type">Bool</span></span><span class="hs-special">]</span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><a href="RaskellCore.html#Sequence"><span class="hs-identifier hs-type">Sequence</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><a href="RaskellCore.html#Sequence"><span class="hs-identifier hs-type">Sequence</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><a href="RaskellCore.html#Sequence"><span class="hs-identifier hs-type">Sequence</span></a></span><span>
+</span><span id="line-52"></span><span id="where%27"><span class="annot"><span class="annottext">where' :: [Bool] -&gt; Sequence -&gt; Sequence -&gt; Sequence
+</span><a href="RaskellLib.html#where%27"><span class="hs-identifier hs-var hs-var">where'</span></a></span></span><span> </span><span id="local-6989586621679029083"><span class="annot"><span class="annottext">[Bool]
+</span><a href="#local-6989586621679029083"><span class="hs-identifier hs-var">bs</span></a></span></span><span> </span><span id="local-6989586621679029084"><span class="annot"><span class="annottext">Sequence
+</span><a href="#local-6989586621679029084"><span class="hs-identifier hs-var">xs</span></a></span></span><span> </span><span id="local-6989586621679029085"><span class="annot"><span class="annottext">Sequence
+</span><a href="#local-6989586621679029085"><span class="hs-identifier hs-var">ys</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">[Bool]
+</span><a href="#local-6989586621679029083"><span class="hs-identifier hs-var">bs</span></a></span><span> </span><span class="annot"><span class="annottext">[Bool] -&gt; (Sequence, Sequence) -&gt; Sequence
+</span><a href="RaskellLib.html#%3F"><span class="hs-operator hs-var">?</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Sequence
+</span><a href="#local-6989586621679029084"><span class="hs-identifier hs-var">xs</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">Sequence
+</span><a href="#local-6989586621679029085"><span class="hs-identifier hs-var">ys</span></a></span><span class="hs-special">)</span><span>
+</span><span id="line-53"></span><span>
+</span><span id="line-54"></span><span class="hs-comment">-- | Shift a sequence to the right by a given number of elements,</span><span>
+</span><span id="line-55"></span><span class="hs-comment">-- filling the vacated positions with the provided `Token`.</span><span>
+</span><span id="line-56"></span><span class="annot"><a href="RaskellLib.html#shiftRight"><span class="hs-identifier hs-type">shiftRight</span></a></span><span> </span><span class="hs-glyph">::</span><span>
+</span><span id="line-57"></span><span>  </span><span class="annot"><span class="hs-comment">-- | Filler `Token`</span></span><span>
+</span><span id="line-58"></span><span>  </span><span class="annot"><a href="RaskellCore.html#Token"><span class="hs-identifier hs-type">Token</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span>
+</span><span id="line-59"></span><span>  </span><span class="annot"><span class="hs-comment">-- | Number of positions to shift</span></span><span>
+</span><span id="line-60"></span><span>  </span><span class="annot"><span class="hs-identifier hs-type">Int8</span></span><span> </span><span class="hs-glyph">-&gt;</span><span>
+</span><span id="line-61"></span><span>  </span><span class="annot"><span class="hs-comment">-- | Input `Sequence`</span></span><span>
+</span><span id="line-62"></span><span>  </span><span class="annot"><a href="RaskellCore.html#Sequence"><span class="hs-identifier hs-type">Sequence</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span>
+</span><span id="line-63"></span><span>  </span><span class="annot"><a href="RaskellCore.html#Sequence"><span class="hs-identifier hs-type">Sequence</span></a></span><span>
+</span><span id="line-64"></span><span id="shiftRight"><span class="annot"><span class="annottext">shiftRight :: Token -&gt; Token -&gt; Sequence -&gt; Sequence
+</span><a href="RaskellLib.html#shiftRight"><span class="hs-identifier hs-var hs-var">shiftRight</span></a></span></span><span> </span><span id="local-6989586621679029086"><span class="annot"><span class="annottext">Token
+</span><a href="#local-6989586621679029086"><span class="hs-identifier hs-var">filler</span></a></span></span><span> </span><span id="local-6989586621679029087"><span class="annot"><span class="annottext">Token
+</span><a href="#local-6989586621679029087"><span class="hs-identifier hs-var">n</span></a></span></span><span> </span><span id="local-6989586621679029088"><span class="annot"><span class="annottext">Sequence
+</span><a href="#local-6989586621679029088"><span class="hs-identifier hs-var">xs</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Token
+-&gt; AggregationType
+-&gt; Sequence
+-&gt; Sequence
+-&gt; (Token -&gt; Token -&gt; Bool)
+-&gt; Sequence
+-&gt; Sequence
+</span><a href="RaskellCore.html#kqv"><span class="hs-identifier hs-var">kqv</span></a></span><span> </span><span class="annot"><span class="annottext">Token
+</span><a href="#local-6989586621679029086"><span class="hs-identifier hs-var">filler</span></a></span><span> </span><span class="annot"><span class="annottext">AggregationType
+</span><a href="RaskellCore.html#Mean"><span class="hs-identifier hs-var">Mean</span></a></span><span> </span><span class="annot"><span class="annottext">Sequence
+</span><a href="#local-6989586621679029091"><span class="hs-identifier hs-var">shiftedIdxs</span></a></span><span> </span><span class="annot"><span class="annottext">Sequence
+</span><a href="#local-6989586621679029092"><span class="hs-identifier hs-var">idxs</span></a></span><span> </span><span class="annot"><span class="annottext">Token -&gt; Token -&gt; Bool
+forall a. Eq a =&gt; a -&gt; a -&gt; Bool
+</span><span class="hs-operator hs-var">(==)</span></span><span> </span><span class="annot"><span class="annottext">Sequence
+</span><a href="#local-6989586621679029088"><span class="hs-identifier hs-var">xs</span></a></span><span>
+</span><span id="line-65"></span><span>  </span><span class="hs-keyword">where</span><span>
+</span><span id="line-66"></span><span>    </span><span id="local-6989586621679029091"><span class="annot"><span class="annottext">shiftedIdxs :: Sequence
+</span><a href="#local-6989586621679029091"><span class="hs-identifier hs-var hs-var">shiftedIdxs</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">(Token -&gt; Token) -&gt; Sequence -&gt; Sequence
+forall a b. (a -&gt; b) -&gt; [a] -&gt; [b]
+</span><span class="hs-identifier hs-var">map</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Token -&gt; Token -&gt; Token
+forall a. Num a =&gt; a -&gt; a -&gt; a
+</span><span class="hs-operator hs-var">+</span></span><span> </span><span class="annot"><span class="annottext">Token
+</span><a href="#local-6989586621679029087"><span class="hs-identifier hs-var">n</span></a></span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">Sequence
+</span><a href="#local-6989586621679029092"><span class="hs-identifier hs-var">idxs</span></a></span><span>
+</span><span id="line-67"></span><span>    </span><span id="local-6989586621679029092"><span class="annot"><span class="annottext">idxs :: Sequence
+</span><a href="#local-6989586621679029092"><span class="hs-identifier hs-var hs-var">idxs</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Sequence -&gt; Sequence
+</span><a href="RaskellCore.html#indices"><span class="hs-identifier hs-var">indices</span></a></span><span> </span><span class="annot"><span class="annottext">Sequence
+</span><a href="#local-6989586621679029088"><span class="hs-identifier hs-var">xs</span></a></span><span>
+</span><span id="line-68"></span><span>
+</span><span id="line-69"></span><span class="annot"><span class="hs-comment">-- | Maps tokens onto bools using Python's &quot;truthiness&quot; rules.</span></span><span>
+</span><span id="line-70"></span><span class="annot"><a href="RaskellLib.html#toBool"><span class="hs-identifier hs-type">toBool</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="RaskellCore.html#Token"><span class="hs-identifier hs-type">Token</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Bool</span></span><span>
+</span><span id="line-71"></span><span id="toBool"><span class="annot"><span class="annottext">toBool :: Token -&gt; Bool
+</span><a href="RaskellLib.html#toBool"><span class="hs-identifier hs-var hs-var">toBool</span></a></span></span><span> </span><span id="local-6989586621679029096"><span class="annot"><span class="annottext">Token
+</span><a href="#local-6989586621679029096"><span class="hs-identifier hs-var">x</span></a></span></span><span>
+</span><span id="line-72"></span><span>  </span><span class="hs-glyph">|</span><span> </span><span class="annot"><span class="annottext">Token
+</span><a href="#local-6989586621679029096"><span class="hs-identifier hs-var">x</span></a></span><span> </span><span class="annot"><span class="annottext">Token -&gt; Token -&gt; Bool
+forall a. Eq a =&gt; a -&gt; a -&gt; Bool
+</span><span class="hs-operator hs-var">==</span></span><span> </span><span class="annot"><span class="annottext">Token
+</span><span class="hs-number">0</span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Bool
+</span><span class="hs-identifier hs-var">False</span></span><span>
+</span><span id="line-73"></span><span>  </span><span class="hs-glyph">|</span><span> </span><span class="annot"><span class="annottext">Bool
+</span><span class="hs-identifier hs-var">otherwise</span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Bool
+</span><span class="hs-identifier hs-var">True</span></span><span>
+</span><span id="line-74"></span><span>
+</span><span id="line-75"></span><span class="annot"><span class="hs-comment">-- | Converts a list of bools to a sequence of tokens.</span></span><span>
+</span><span id="line-76"></span><span class="annot"><a href="RaskellLib.html#fromBoolSeq"><span class="hs-identifier hs-type">fromBoolSeq</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="hs-special">[</span><span class="annot"><span class="hs-identifier hs-type">Bool</span></span><span class="hs-special">]</span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><a href="RaskellCore.html#Sequence"><span class="hs-identifier hs-type">Sequence</span></a></span><span>
+</span><span id="line-77"></span><span id="fromBoolSeq"><span class="annot"><span class="annottext">fromBoolSeq :: [Bool] -&gt; Sequence
+</span><a href="RaskellLib.html#fromBoolSeq"><span class="hs-identifier hs-var hs-var">fromBoolSeq</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">(Bool -&gt; Token) -&gt; [Bool] -&gt; Sequence
+forall a b. (a -&gt; b) -&gt; [a] -&gt; [b]
+</span><span class="hs-identifier hs-var">map</span></span><span> </span><span class="annot"><span class="annottext">Bool -&gt; Token
+</span><a href="RaskellCore.html#fromBool"><span class="hs-identifier hs-var">fromBool</span></a></span><span>
+</span><span id="line-78"></span><span>
+</span><span id="line-79"></span><span class="annot"><span class="hs-comment">-- | Computes the cumulative sum of a boolean sequence.</span></span><span>
+</span><span id="line-80"></span><span class="annot"><a href="RaskellLib.html#cumSum"><span class="hs-identifier hs-type">cumSum</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="hs-special">[</span><span class="annot"><span class="hs-identifier hs-type">Bool</span></span><span class="hs-special">]</span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><a href="RaskellCore.html#Sequence"><span class="hs-identifier hs-type">Sequence</span></a></span><span>
+</span><span id="line-81"></span><span id="cumSum"><span class="annot"><span class="annottext">cumSum :: [Bool] -&gt; Sequence
+</span><a href="RaskellLib.html#cumSum"><span class="hs-identifier hs-var hs-var">cumSum</span></a></span></span><span> </span><span id="local-6989586621679029098"><span class="annot"><span class="annottext">[Bool]
+</span><a href="#local-6989586621679029098"><span class="hs-identifier hs-var">bs</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Selector -&gt; Sequence
+</span><a href="RaskellCore.html#selWidth"><span class="hs-identifier hs-var">selWidth</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Sequence -&gt; Sequence -&gt; (Token -&gt; Token -&gt; Bool) -&gt; Selector
+</span><a href="RaskellCore.html#selectCausal"><span class="hs-identifier hs-var">selectCausal</span></a></span><span> </span><span class="annot"><span class="annottext">Sequence
+</span><a href="#local-6989586621679029101"><span class="hs-identifier hs-var">bTokens</span></a></span><span> </span><span class="annot"><span class="annottext">Sequence
+</span><a href="#local-6989586621679029101"><span class="hs-identifier hs-var">bTokens</span></a></span><span> </span><span class="annot"><span class="annottext">Token -&gt; Token -&gt; Bool
+forall {p}. Token -&gt; p -&gt; Bool
+</span><a href="#local-6989586621679029102"><span class="hs-identifier hs-var">first</span></a></span><span class="hs-special">)</span><span>
+</span><span id="line-82"></span><span>  </span><span class="hs-keyword">where</span><span>
+</span><span id="line-83"></span><span>    </span><span id="local-6989586621679029101"><span class="annot"><span class="annottext">bTokens :: Sequence
+</span><a href="#local-6989586621679029101"><span class="hs-identifier hs-var hs-var">bTokens</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">[Bool] -&gt; Sequence
+</span><a href="RaskellLib.html#fromBoolSeq"><span class="hs-identifier hs-var">fromBoolSeq</span></a></span><span> </span><span class="annot"><span class="annottext">[Bool]
+</span><a href="#local-6989586621679029098"><span class="hs-identifier hs-var">bs</span></a></span><span>
+</span><span id="line-84"></span><span>    </span><span id="local-6989586621679029102"><span class="annot"><span class="annottext">first :: Token -&gt; p -&gt; Bool
+</span><a href="#local-6989586621679029102"><span class="hs-identifier hs-var hs-var">first</span></a></span></span><span> </span><span id="local-6989586621679029103"><span class="annot"><span class="annottext">Token
+</span><a href="#local-6989586621679029103"><span class="hs-identifier hs-var">x</span></a></span></span><span> </span><span class="annot"><span class="annottext">p
+</span><span class="hs-identifier">_</span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Token -&gt; Bool
+</span><a href="RaskellLib.html#toBool"><span class="hs-identifier hs-var">toBool</span></a></span><span> </span><span class="annot"><span class="annottext">Token
+</span><a href="#local-6989586621679029103"><span class="hs-identifier hs-var">x</span></a></span><span>
+</span><span id="line-85"></span><span>
+</span><span id="line-86"></span><span class="annot"><span class="hs-comment">-- | Masks a `Sequence` with a boolean sequence, using the provided `Token` as the mask.</span></span><span>
+</span><span id="line-87"></span><span class="annot"><a href="RaskellLib.html#mask"><span class="hs-identifier hs-type">mask</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="RaskellCore.html#Token"><span class="hs-identifier hs-type">Token</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="hs-special">[</span><span class="annot"><span class="hs-identifier hs-type">Bool</span></span><span class="hs-special">]</span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><a href="RaskellCore.html#Sequence"><span class="hs-identifier hs-type">Sequence</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><a href="RaskellCore.html#Sequence"><span class="hs-identifier hs-type">Sequence</span></a></span><span>
+</span><span id="line-88"></span><span id="mask"><span class="annot"><span class="annottext">mask :: Token -&gt; [Bool] -&gt; Sequence -&gt; Sequence
+</span><a href="RaskellLib.html#mask"><span class="hs-identifier hs-var hs-var">mask</span></a></span></span><span> </span><span id="local-6989586621679029104"><span class="annot"><span class="annottext">Token
+</span><a href="#local-6989586621679029104"><span class="hs-identifier hs-var">maskT</span></a></span></span><span> </span><span id="local-6989586621679029105"><span class="annot"><span class="annottext">[Bool]
+</span><a href="#local-6989586621679029105"><span class="hs-identifier hs-var">bs</span></a></span></span><span> </span><span id="local-6989586621679029106"><span class="annot"><span class="annottext">Sequence
+</span><a href="#local-6989586621679029106"><span class="hs-identifier hs-var">xs</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">[Bool]
+</span><a href="#local-6989586621679029105"><span class="hs-identifier hs-var">bs</span></a></span><span> </span><span class="annot"><span class="annottext">[Bool] -&gt; (Sequence, Sequence) -&gt; Sequence
+</span><a href="RaskellLib.html#%3F"><span class="hs-operator hs-var">?</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Sequence
+</span><a href="#local-6989586621679029106"><span class="hs-identifier hs-var">xs</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">Sequence
+</span><a href="#local-6989586621679029106"><span class="hs-identifier hs-var">xs</span></a></span><span> </span><span class="annot"><span class="annottext">Sequence -&gt; Token -&gt; Sequence
+</span><a href="RaskellCore.html#filledWith"><span class="hs-operator hs-var">`filledWith`</span></a></span><span> </span><span class="annot"><span class="annottext">Token
+</span><a href="#local-6989586621679029104"><span class="hs-identifier hs-var">maskT</span></a></span><span class="hs-special">)</span><span>
+</span><span id="line-89"></span><span>
+</span><span id="line-90"></span><span class="annot"><span class="hs-comment">-- | Computes the running maximum of a `Sequence`.</span></span><span>
+</span><span id="line-91"></span><span class="annot"><a href="RaskellLib.html#maximum%27"><span class="hs-identifier hs-type">maximum'</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="RaskellCore.html#Sequence"><span class="hs-identifier hs-type">Sequence</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><a href="RaskellCore.html#Sequence"><span class="hs-identifier hs-type">Sequence</span></a></span><span>
+</span><span id="line-92"></span><span id="maximum%27"><span class="annot"><span class="annottext">maximum' :: Sequence -&gt; Sequence
+</span><a href="RaskellLib.html#maximum%27"><span class="hs-identifier hs-var hs-var">maximum'</span></a></span></span><span> </span><span id="local-6989586621679029108"><span class="annot"><span class="annottext">Sequence
+</span><a href="#local-6989586621679029108"><span class="hs-identifier hs-var">xs</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Sequence
+-&gt; Sequence -&gt; (Token -&gt; Token -&gt; Bool) -&gt; Sequence -&gt; Sequence
+</span><a href="RaskellCore.html#maxKQV"><span class="hs-identifier hs-var">maxKQV</span></a></span><span> </span><span class="annot"><span class="annottext">Sequence
+</span><a href="#local-6989586621679029108"><span class="hs-identifier hs-var">xs</span></a></span><span> </span><span class="annot"><span class="annottext">Sequence
+</span><a href="#local-6989586621679029108"><span class="hs-identifier hs-var">xs</span></a></span><span> </span><span class="annot"><span class="annottext">Token -&gt; Token -&gt; Bool
+forall {p} {p}. p -&gt; p -&gt; Bool
+</span><a href="#local-6989586621679029110"><span class="hs-identifier hs-var">always</span></a></span><span> </span><span class="annot"><span class="annottext">Sequence
+</span><a href="#local-6989586621679029108"><span class="hs-identifier hs-var">xs</span></a></span><span>
+</span><span id="line-93"></span><span>  </span><span class="hs-keyword">where</span><span>
+</span><span id="line-94"></span><span>    </span><span id="local-6989586621679029110"><span class="annot"><span class="annottext">always :: p -&gt; p -&gt; Bool
+</span><a href="#local-6989586621679029110"><span class="hs-identifier hs-var hs-var">always</span></a></span></span><span> </span><span class="annot"><span class="annottext">p
+</span><span class="hs-identifier">_</span></span><span> </span><span class="annot"><span class="annottext">p
+</span><span class="hs-identifier">_</span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Bool
+</span><span class="hs-identifier hs-var">True</span></span><span>
+</span><span id="line-95"></span><span>
+</span><span id="line-96"></span><span class="annot"><span class="hs-comment">-- | Computes the running minimum of a `Sequence`.</span></span><span>
+</span><span id="line-97"></span><span class="annot"><a href="RaskellLib.html#minimum%27"><span class="hs-identifier hs-type">minimum'</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="RaskellCore.html#Sequence"><span class="hs-identifier hs-type">Sequence</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><a href="RaskellCore.html#Sequence"><span class="hs-identifier hs-type">Sequence</span></a></span><span>
+</span><span id="line-98"></span><span id="minimum%27"><span class="annot"><span class="annottext">minimum' :: Sequence -&gt; Sequence
+</span><a href="RaskellLib.html#minimum%27"><span class="hs-identifier hs-var hs-var">minimum'</span></a></span></span><span> </span><span id="local-6989586621679029111"><span class="annot"><span class="annottext">Sequence
+</span><a href="#local-6989586621679029111"><span class="hs-identifier hs-var">xs</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Sequence
+-&gt; Sequence -&gt; (Token -&gt; Token -&gt; Bool) -&gt; Sequence -&gt; Sequence
+</span><a href="RaskellCore.html#minKQV"><span class="hs-identifier hs-var">minKQV</span></a></span><span> </span><span class="annot"><span class="annottext">Sequence
+</span><a href="#local-6989586621679029111"><span class="hs-identifier hs-var">xs</span></a></span><span> </span><span class="annot"><span class="annottext">Sequence
+</span><a href="#local-6989586621679029111"><span class="hs-identifier hs-var">xs</span></a></span><span> </span><span class="annot"><span class="annottext">Token -&gt; Token -&gt; Bool
+forall {p} {p}. p -&gt; p -&gt; Bool
+</span><a href="#local-6989586621679029113"><span class="hs-identifier hs-var">always</span></a></span><span> </span><span class="annot"><span class="annottext">Sequence
+</span><a href="#local-6989586621679029111"><span class="hs-identifier hs-var">xs</span></a></span><span>
+</span><span id="line-99"></span><span>  </span><span class="hs-keyword">where</span><span>
+</span><span id="line-100"></span><span>    </span><span id="local-6989586621679029113"><span class="annot"><span class="annottext">always :: p -&gt; p -&gt; Bool
+</span><a href="#local-6989586621679029113"><span class="hs-identifier hs-var hs-var">always</span></a></span></span><span> </span><span class="annot"><span class="annottext">p
+</span><span class="hs-identifier">_</span></span><span> </span><span class="annot"><span class="annottext">p
+</span><span class="hs-identifier">_</span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Bool
+</span><span class="hs-identifier hs-var">True</span></span><span>
+</span><span id="line-101"></span><span>
+</span><span id="line-102"></span><span class="annot"><span class="hs-comment">-- | Computes the indices of the running maximum values in a `Sequence`.</span></span><span>
+</span><span id="line-103"></span><span class="annot"><a href="RaskellLib.html#argmax"><span class="hs-identifier hs-type">argmax</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="RaskellCore.html#Sequence"><span class="hs-identifier hs-type">Sequence</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><a href="RaskellCore.html#Sequence"><span class="hs-identifier hs-type">Sequence</span></a></span><span>
+</span><span id="line-104"></span><span id="argmax"><span class="annot"><span class="annottext">argmax :: Sequence -&gt; Sequence
+</span><a href="RaskellLib.html#argmax"><span class="hs-identifier hs-var hs-var">argmax</span></a></span></span><span> </span><span id="local-6989586621679029114"><span class="annot"><span class="annottext">Sequence
+</span><a href="#local-6989586621679029114"><span class="hs-identifier hs-var">xs</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Sequence
+-&gt; Sequence -&gt; (Token -&gt; Token -&gt; Bool) -&gt; Sequence -&gt; Sequence
+</span><a href="RaskellCore.html#maxKQV"><span class="hs-identifier hs-var">maxKQV</span></a></span><span> </span><span class="annot"><span class="annottext">Sequence
+</span><a href="#local-6989586621679029114"><span class="hs-identifier hs-var">xs</span></a></span><span> </span><span class="annot"><span class="annottext">Sequence
+</span><a href="#local-6989586621679029115"><span class="hs-identifier hs-var">maxs</span></a></span><span> </span><span class="annot"><span class="annottext">Token -&gt; Token -&gt; Bool
+forall a. Eq a =&gt; a -&gt; a -&gt; Bool
+</span><span class="hs-operator hs-var">(==)</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Sequence -&gt; Sequence
+</span><a href="RaskellCore.html#indicesOf"><span class="hs-identifier hs-var">indicesOf</span></a></span><span> </span><span class="annot"><span class="annottext">Sequence
+</span><a href="#local-6989586621679029114"><span class="hs-identifier hs-var">xs</span></a></span><span class="hs-special">)</span><span>
+</span><span id="line-105"></span><span>  </span><span class="hs-keyword">where</span><span>
+</span><span id="line-106"></span><span>    </span><span id="local-6989586621679029115"><span class="annot"><span class="annottext">maxs :: Sequence
+</span><a href="#local-6989586621679029115"><span class="hs-identifier hs-var hs-var">maxs</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Sequence -&gt; Sequence
+</span><a href="RaskellLib.html#maximum%27"><span class="hs-identifier hs-var">maximum'</span></a></span><span> </span><span class="annot"><span class="annottext">Sequence
+</span><a href="#local-6989586621679029114"><span class="hs-identifier hs-var">xs</span></a></span><span>
+</span><span id="line-107"></span><span>
+</span><span id="line-108"></span><span class="annot"><span class="hs-comment">-- | Computes the indices of the running minimum values in a `Sequence`.</span></span><span>
+</span><span id="line-109"></span><span class="annot"><a href="RaskellLib.html#argmin"><span class="hs-identifier hs-type">argmin</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="RaskellCore.html#Sequence"><span class="hs-identifier hs-type">Sequence</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><a href="RaskellCore.html#Sequence"><span class="hs-identifier hs-type">Sequence</span></a></span><span>
+</span><span id="line-110"></span><span id="argmin"><span class="annot"><span class="annottext">argmin :: Sequence -&gt; Sequence
+</span><a href="RaskellLib.html#argmin"><span class="hs-identifier hs-var hs-var">argmin</span></a></span></span><span> </span><span id="local-6989586621679029117"><span class="annot"><span class="annottext">Sequence
+</span><a href="#local-6989586621679029117"><span class="hs-identifier hs-var">xs</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Sequence
+-&gt; Sequence -&gt; (Token -&gt; Token -&gt; Bool) -&gt; Sequence -&gt; Sequence
+</span><a href="RaskellCore.html#maxKQV"><span class="hs-identifier hs-var">maxKQV</span></a></span><span> </span><span class="annot"><span class="annottext">Sequence
+</span><a href="#local-6989586621679029117"><span class="hs-identifier hs-var">xs</span></a></span><span> </span><span class="annot"><span class="annottext">Sequence
+</span><a href="#local-6989586621679029118"><span class="hs-identifier hs-var">mins</span></a></span><span> </span><span class="annot"><span class="annottext">Token -&gt; Token -&gt; Bool
+forall a. Eq a =&gt; a -&gt; a -&gt; Bool
+</span><span class="hs-operator hs-var">(==)</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Sequence -&gt; Sequence
+</span><a href="RaskellCore.html#indicesOf"><span class="hs-identifier hs-var">indicesOf</span></a></span><span> </span><span class="annot"><span class="annottext">Sequence
+</span><a href="#local-6989586621679029117"><span class="hs-identifier hs-var">xs</span></a></span><span class="hs-special">)</span><span>
+</span><span id="line-111"></span><span>  </span><span class="hs-keyword">where</span><span>
+</span><span id="line-112"></span><span>    </span><span id="local-6989586621679029118"><span class="annot"><span class="annottext">mins :: Sequence
+</span><a href="#local-6989586621679029118"><span class="hs-identifier hs-var hs-var">mins</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Sequence -&gt; Sequence
+</span><a href="RaskellLib.html#minimum%27"><span class="hs-identifier hs-var">minimum'</span></a></span><span> </span><span class="annot"><span class="annottext">Sequence
+</span><a href="#local-6989586621679029117"><span class="hs-identifier hs-var">xs</span></a></span><span>
+</span><span id="line-113"></span><span>
+</span><span id="line-114"></span><span class="annot"><a href="RaskellLib.html#leq"><span class="hs-identifier hs-type">leq</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="RaskellCore.html#Token"><span class="hs-identifier hs-type">Token</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><a href="RaskellCore.html#Token"><span class="hs-identifier hs-type">Token</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Bool</span></span><span>
+</span><span id="line-115"></span><span id="leq"><span class="annot"><span class="annottext">leq :: Token -&gt; Token -&gt; Bool
+</span><a href="RaskellLib.html#leq"><span class="hs-identifier hs-var hs-var">leq</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Token -&gt; Token -&gt; Bool
+forall a. Ord a =&gt; a -&gt; a -&gt; Bool
+</span><span class="hs-operator hs-var">(&lt;=)</span></span><span>
+</span><span id="line-116"></span><span>
+</span><span id="line-117"></span><span class="annot"><a href="RaskellLib.html#geq"><span class="hs-identifier hs-type">geq</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="RaskellCore.html#Token"><span class="hs-identifier hs-type">Token</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><a href="RaskellCore.html#Token"><span class="hs-identifier hs-type">Token</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Bool</span></span><span>
+</span><span id="line-118"></span><span id="geq"><span class="annot"><span class="annottext">geq :: Token -&gt; Token -&gt; Bool
+</span><a href="RaskellLib.html#geq"><span class="hs-identifier hs-var hs-var">geq</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Token -&gt; Token -&gt; Bool
+forall a. Ord a =&gt; a -&gt; a -&gt; Bool
+</span><span class="hs-operator hs-var">(&gt;=)</span></span><span>
+</span><span id="line-119"></span><span>
+</span><span id="line-120"></span><span class="annot"><a href="RaskellLib.html#lt"><span class="hs-identifier hs-type">lt</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="RaskellCore.html#Token"><span class="hs-identifier hs-type">Token</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><a href="RaskellCore.html#Token"><span class="hs-identifier hs-type">Token</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Bool</span></span><span>
+</span><span id="line-121"></span><span id="lt"><span class="annot"><span class="annottext">lt :: Token -&gt; Token -&gt; Bool
+</span><a href="RaskellLib.html#lt"><span class="hs-identifier hs-var hs-var">lt</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Token -&gt; Token -&gt; Bool
+forall a. Ord a =&gt; a -&gt; a -&gt; Bool
+</span><span class="hs-operator hs-var">(&lt;)</span></span><span>
+</span><span id="line-122"></span><span>
+</span><span id="line-123"></span><span class="annot"><a href="RaskellLib.html#gt"><span class="hs-identifier hs-type">gt</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="RaskellCore.html#Token"><span class="hs-identifier hs-type">Token</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><a href="RaskellCore.html#Token"><span class="hs-identifier hs-type">Token</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Bool</span></span><span>
+</span><span id="line-124"></span><span id="gt"><span class="annot"><span class="annottext">gt :: Token -&gt; Token -&gt; Bool
+</span><a href="RaskellLib.html#gt"><span class="hs-identifier hs-var hs-var">gt</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Token -&gt; Token -&gt; Bool
+forall a. Ord a =&gt; a -&gt; a -&gt; Bool
+</span><span class="hs-operator hs-var">(&gt;)</span></span><span>
+</span><span id="line-125"></span><span>
+</span><span id="line-126"></span><span class="annot"><span class="hs-comment">-- | Greedily and autoregressively sample the output of a RASP-L program on a sequence.</span></span><span>
+</span><span id="line-127"></span><span class="annot"><a href="RaskellLib.html#sample"><span class="hs-identifier hs-type">sample</span></a></span><span> </span><span class="hs-glyph">::</span><span>
+</span><span id="line-128"></span><span>  </span><span class="annot"><span class="hs-comment">-- | End of sequence token</span></span><span>
+</span><span id="line-129"></span><span>  </span><span class="annot"><a href="RaskellCore.html#Token"><span class="hs-identifier hs-type">Token</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span>
+</span><span id="line-130"></span><span>  </span><span class="annot"><span class="hs-comment">-- | RASP-L program to extend the sequence</span></span><span>
+</span><span id="line-131"></span><span>  </span><span class="hs-special">(</span><span class="annot"><a href="RaskellCore.html#Sequence"><span class="hs-identifier hs-type">Sequence</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><a href="RaskellCore.html#Sequence"><span class="hs-identifier hs-type">Sequence</span></a></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">-&gt;</span><span>
+</span><span id="line-132"></span><span>  </span><span class="annot"><span class="hs-comment">-- | Initial/prompt sequence</span></span><span>
+</span><span id="line-133"></span><span>  </span><span class="annot"><a href="RaskellCore.html#Sequence"><span class="hs-identifier hs-type">Sequence</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span>
+</span><span id="line-134"></span><span>  </span><span class="annot"><span class="hs-comment">-- | Number of steps to decode</span></span><span>
+</span><span id="line-135"></span><span>  </span><span class="annot"><span class="hs-identifier hs-type">Word8</span></span><span> </span><span class="hs-glyph">-&gt;</span><span>
+</span><span id="line-136"></span><span>  </span><span class="annot"><span class="hs-comment">-- | Output (including prompt)</span></span><span>
+</span><span id="line-137"></span><span>  </span><span class="annot"><a href="RaskellCore.html#Sequence"><span class="hs-identifier hs-type">Sequence</span></a></span><span>
+</span><span id="line-138"></span><span id="sample"><span class="annot"><span class="annottext">sample :: Token -&gt; (Sequence -&gt; Sequence) -&gt; Sequence -&gt; Word8 -&gt; Sequence
+</span><a href="RaskellLib.html#sample"><span class="hs-identifier hs-var hs-var">sample</span></a></span></span><span> </span><span class="annot"><span class="annottext">Token
+</span><span class="hs-identifier">_</span></span><span> </span><span class="annot"><span class="annottext">Sequence -&gt; Sequence
+</span><span class="hs-identifier">_</span></span><span> </span><span id="local-6989586621679029122"><span class="annot"><span class="annottext">Sequence
+</span><a href="#local-6989586621679029122"><span class="hs-identifier hs-var">xs</span></a></span></span><span> </span><span class="annot"><span class="annottext">Word8
+</span><span class="hs-number">0</span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Sequence
+</span><a href="#local-6989586621679029122"><span class="hs-identifier hs-var">xs</span></a></span><span>
+</span><span id="line-139"></span><span class="annot"><a href="RaskellLib.html#sample"><span class="hs-identifier hs-var">sample</span></a></span><span> </span><span id="local-6989586621679029123"><span class="annot"><span class="annottext">Token
+</span><a href="#local-6989586621679029123"><span class="hs-identifier hs-var">endOfSequence</span></a></span></span><span> </span><span id="local-6989586621679029124"><span class="annot"><span class="annottext">Sequence -&gt; Sequence
+</span><a href="#local-6989586621679029124"><span class="hs-identifier hs-var">prog</span></a></span></span><span> </span><span id="local-6989586621679029125"><span class="annot"><span class="annottext">Sequence
+</span><a href="#local-6989586621679029125"><span class="hs-identifier hs-var">xs</span></a></span></span><span> </span><span id="local-6989586621679029126"><span class="annot"><span class="annottext">Word8
+</span><a href="#local-6989586621679029126"><span class="hs-identifier hs-var">n</span></a></span></span><span>
+</span><span id="line-140"></span><span>  </span><span class="hs-glyph">|</span><span> </span><span class="annot"><span class="annottext">Sequence -&gt; Token
+forall a. HasCallStack =&gt; [a] -&gt; a
+</span><span class="hs-identifier hs-var">last</span></span><span> </span><span class="annot"><span class="annottext">Sequence
+</span><a href="#local-6989586621679029125"><span class="hs-identifier hs-var">xs</span></a></span><span> </span><span class="annot"><span class="annottext">Token -&gt; Token -&gt; Bool
+forall a. Eq a =&gt; a -&gt; a -&gt; Bool
+</span><span class="hs-operator hs-var">==</span></span><span> </span><span class="annot"><span class="annottext">Token
+</span><a href="#local-6989586621679029123"><span class="hs-identifier hs-var">endOfSequence</span></a></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Sequence
+</span><a href="#local-6989586621679029125"><span class="hs-identifier hs-var">xs</span></a></span><span>
+</span><span id="line-141"></span><span>  </span><span class="hs-glyph">|</span><span> </span><span class="annot"><span class="annottext">Bool
+</span><span class="hs-identifier hs-var">otherwise</span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Token -&gt; (Sequence -&gt; Sequence) -&gt; Sequence -&gt; Word8 -&gt; Sequence
+</span><a href="RaskellLib.html#sample"><span class="hs-identifier hs-var">sample</span></a></span><span> </span><span class="annot"><span class="annottext">Token
+</span><a href="#local-6989586621679029123"><span class="hs-identifier hs-var">endOfSequence</span></a></span><span> </span><span class="annot"><span class="annottext">Sequence -&gt; Sequence
+</span><a href="#local-6989586621679029124"><span class="hs-identifier hs-var">prog</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Sequence
+</span><a href="#local-6989586621679029125"><span class="hs-identifier hs-var">xs</span></a></span><span> </span><span class="annot"><span class="annottext">Sequence -&gt; Sequence -&gt; Sequence
+forall a. [a] -&gt; [a] -&gt; [a]
+</span><span class="hs-operator hs-var">++</span></span><span> </span><span class="hs-special">[</span><span class="annot"><span class="annottext">Sequence -&gt; Token
+forall a. HasCallStack =&gt; [a] -&gt; a
+</span><span class="hs-identifier hs-var">last</span></span><span> </span><span class="annot"><span class="annottext">(Sequence -&gt; Token) -&gt; Sequence -&gt; Token
+forall a b. (a -&gt; b) -&gt; a -&gt; b
+</span><span class="hs-operator hs-var">$</span></span><span> </span><span class="annot"><span class="annottext">Sequence -&gt; Sequence
+</span><a href="#local-6989586621679029124"><span class="hs-identifier hs-var">prog</span></a></span><span> </span><span class="annot"><span class="annottext">Sequence
+</span><a href="#local-6989586621679029125"><span class="hs-identifier hs-var">xs</span></a></span><span class="hs-special">]</span><span class="hs-special">)</span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Word8
+</span><a href="#local-6989586621679029126"><span class="hs-identifier hs-var">n</span></a></span><span> </span><span class="annot"><span class="annottext">Word8 -&gt; Word8 -&gt; Word8
+forall a. Num a =&gt; a -&gt; a -&gt; a
+</span><span class="hs-glyph hs-var">-</span></span><span> </span><span class="annot"><span class="annottext">Word8
+</span><span class="hs-number">1</span></span><span class="hs-special">)</span><span>
+</span><span id="line-142"></span><span>
+</span><span id="line-143"></span><span class="hs-comment">-- | Greedily and autoregressively sample the output of a RASP-L program on a sequence.</span><span>
+</span><span id="line-144"></span><span class="hs-comment">--</span><span>
+</span><span id="line-145"></span><span class="hs-comment">-- Provided for compatibility with Listing 3.</span><span>
+</span><span id="line-146"></span><span class="annot"><a href="RaskellLib.html#sample_autoregressive"><span class="hs-identifier hs-type">sample_autoregressive</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="RaskellCore.html#Token"><span class="hs-identifier hs-type">Token</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="hs-special">(</span><span class="annot"><a href="RaskellCore.html#Sequence"><span class="hs-identifier hs-type">Sequence</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><a href="RaskellCore.html#Sequence"><span class="hs-identifier hs-type">Sequence</span></a></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><a href="RaskellCore.html#Sequence"><span class="hs-identifier hs-type">Sequence</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Word8</span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><a href="RaskellCore.html#Sequence"><span class="hs-identifier hs-type">Sequence</span></a></span><span>
+</span><span id="line-147"></span><span id="sample_autoregressive"><span class="annot"><span class="annottext">sample_autoregressive :: Token -&gt; (Sequence -&gt; Sequence) -&gt; Sequence -&gt; Word8 -&gt; Sequence
+</span><a href="RaskellLib.html#sample_autoregressive"><span class="hs-identifier hs-var hs-var">sample_autoregressive</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Token -&gt; (Sequence -&gt; Sequence) -&gt; Sequence -&gt; Word8 -&gt; Sequence
+</span><a href="RaskellLib.html#sample"><span class="hs-identifier hs-var">sample</span></a></span><span>
+</span><span id="line-148"></span></pre></body></html>
