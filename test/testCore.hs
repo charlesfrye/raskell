@@ -1,5 +1,5 @@
 import Control.Monad (when)
-import Core
+import RaskellCore
 import Test.QuickCheck (Property, Result (..), quickCheckResult, (===), (==>))
 
 any' :: Predicate

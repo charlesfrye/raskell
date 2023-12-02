@@ -3,7 +3,7 @@
 -- It is based on Listing 3 of
 -- "What Algorithms Can Transformers Learn", https://arxiv.org/abs/2310.16028,
 -- by Zhou et al.
-module Lib
+module RaskellLib
   ( -- * Logical Operations
     (?),
     shiftRight,
@@ -32,9 +32,9 @@ module Lib
   )
 where
 
-import Core
 import Data.Int (Int8)
 import Data.Word (Word8)
+import RaskellCore
 
 -- | Use a boolean sequence to select between two sequences.
 -- Also known in Python RASP-L as "where", see `where'`.

@@ -1,7 +1,7 @@
 module Count (main) where
 
-import Core
-import Lib
+import RaskellCore
+import RaskellLib
 
 sos :: Token
 sos = -1

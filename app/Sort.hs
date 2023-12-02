@@ -1,7 +1,7 @@
 module Sort (main) where
 
-import Core
-import Lib (gt, sample)
+import RaskellCore
+import RaskellLib (gt, sample)
 
 -- | Θ(n^2) time, Θ(n) space sorting algorithm
 sort :: Sequence -> Sequence

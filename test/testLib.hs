@@ -1,7 +1,7 @@
 import Control.Monad (when)
-import Core
 import Data.Int (Int8)
-import Lib
+import RaskellCore
+import RaskellLib
 import Test.QuickCheck (Property, Result (..), quickCheckResult, (===), (==>))
 
 prop_where_allTrue_is_idLeft :: Sequence -> Property

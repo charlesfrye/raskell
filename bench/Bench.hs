@@ -1,6 +1,6 @@
-import Core
 import Criterion.Main
-import Lib (gt, sample)
+import RaskellCore
+import RaskellLib (gt, sample)
 
 sort :: Sequence -> Sequence
 sort xs = sample (maximum xs) raspSort (xs ++ [minBound]) (fromIntegral (length xs))

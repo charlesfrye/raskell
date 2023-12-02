@@ -27,8 +27,8 @@ source-repository head
 
 library
   exposed-modules:
-      Core
-      Lib
+      RaskellCore
+      RaskellLib
   other-modules:
       Paths_raskell
   autogen-modules:

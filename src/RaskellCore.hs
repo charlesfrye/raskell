@@ -3,7 +3,7 @@
 -- It is based on Listing 2 of
 -- "What Algorithms Can Transformers Learn", https://arxiv.org/abs/2310.16028,
 -- by Zhou et al.
-module Core
+module RaskellCore
   ( -- * Types
 
     -- | Most of these types are merely aliases.
