@@ -5,7 +5,7 @@ cabal-version: 2.2
 -- see: https://github.com/sol/hpack
 
 name:           raskell
-version:        0.0.0.1
+version:        0.0.0.2
 synopsis:       RASP-L in Haskell
 description:    Implements the RASP-L language from "What Algorithms Can Transformers Learn" by Zhou et al. For more information, see the README at <https://github.com/charlesfrye/raskell#readme>.
 category:       nlp
