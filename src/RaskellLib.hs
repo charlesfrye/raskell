@@ -17,6 +17,15 @@ module RaskellLib
     argmax,
     argmin,
 
+    -- * Aggregations with `Queries`
+    numPrev,
+    hasSeen,
+
+    -- * Indexing with `Queries`
+    firsts,
+    lasts,
+    indexSelect,
+
     -- * Token Comparisons
     leq,
     geq,
@@ -110,6 +119,26 @@ argmin :: Sequence -> Sequence
 argmin xs = maxKQV xs mins (==) (indicesOf xs)
   where
     mins = minimum' xs
+
+-- | Computes the number of previous tokens in a `Sequence` that are equal to each `Token` from `Queries`.
+numPrev :: Sequence -> Queries -> Sequence
+numPrev xs queries = selWidth (selectCausal xs queries (==))
+
+-- | Returns 1s where the `Token` from the `Queries` has been seen before in the `Sequence`.
+hasSeen :: Sequence -> Queries -> Sequence
+hasSeen xs queries = kqv 0 Max xs queries (==) (queries `filledWith` 1)
+
+-- | Finds the first occurrence of each query token in a `Sequence`.
+firsts :: Token -> Sequence -> Queries -> Sequence
+firsts filler xs queries = kqv filler Min xs queries (==) (indicesOf xs)
+
+-- | Finds the last occurrence of each query token in a `Sequence`.
+lasts :: Token -> Sequence -> Queries -> Sequence
+lasts filler xs queries = kqv filler Max xs queries (==) (indicesOf xs)
+
+-- | Selects the tokens from a `Sequence` at the indices provided by another sequence.
+indexSelect :: Token -> Sequence -> Sequence -> Sequence
+indexSelect filler xs idxs = kqv filler Max (indicesOf xs) idxs (==) xs
 
 leq :: Token -> Token -> Bool
 leq = (<=)
