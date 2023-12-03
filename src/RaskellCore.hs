@@ -126,7 +126,7 @@ minKQV = kqv maxInt8 Min
   where
     maxInt8 = maxBound :: Int8
 
--- | Compareis pairs of elements from sequences with a predicate subject to a causal constraint.
+-- | Compares pairs of elements from sequences with a predicate subject to a causal constraint.
 selectCausal :: Keys -> Queries -> Predicate -> Selector
 selectCausal keys queries predicate =
   [ [ (keyIndex <= queryIndex) && predicate (keys !! keyIndex) (queries !! queryIndex)
