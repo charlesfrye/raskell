@@ -1,4 +1,5 @@
 {-# LANGUAGE FlexibleInstances #-}
+{-# OPTIONS_GHC -Wno-name-shadowing #-}
 
 import Control.Monad (when)
 import Data.Int (Int8)
@@ -165,7 +166,8 @@ main = do
         quickCheckResult prop_numPrev_matches_zipWith,
         quickCheckResult prop_hasSeen_matches_zipWith,
         quickCheckResult prop_firsts_matches_zipWith,
-        quickCheckResult prop_lasts_matches_zipWith
+        quickCheckResult prop_lasts_matches_zipWith,
+        quickCheckResult prop_indexSelect_matches_zipWith
       ]
   let failed = not (all isSuccess results)
   when failed $ error "Some tests failed"
