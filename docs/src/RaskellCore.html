@@ -114,21 +114,21 @@
 </span><span id="line-114"></span><span>  </span><span class="annot"><a href="RaskellCore.html#Sequence"><span class="hs-identifier hs-type">Sequence</span></a></span><span>
 </span><span id="line-115"></span><span id="kqv"><span class="annot"><span class="annottext">kqv :: Token
 -&gt; AggregationType -&gt; Keys -&gt; Keys -&gt; Predicate -&gt; Keys -&gt; Keys
-</span><a href="RaskellCore.html#kqv"><span class="hs-identifier hs-var hs-var">kqv</span></a></span></span><span> </span><span id="local-6989586621679028921"><span class="annot"><span class="annottext">Token
-</span><a href="#local-6989586621679028921"><span class="hs-identifier hs-var">filler</span></a></span></span><span> </span><span id="local-6989586621679028922"><span class="annot"><span class="annottext">AggregationType
-</span><a href="#local-6989586621679028922"><span class="hs-identifier hs-var">agg</span></a></span></span><span> </span><span id="local-6989586621679028923"><span class="annot"><span class="annottext">Keys
-</span><a href="#local-6989586621679028923"><span class="hs-identifier hs-var">keys</span></a></span></span><span> </span><span id="local-6989586621679028924"><span class="annot"><span class="annottext">Keys
-</span><a href="#local-6989586621679028924"><span class="hs-identifier hs-var">queries</span></a></span></span><span> </span><span id="local-6989586621679028925"><span class="annot"><span class="annottext">Predicate
-</span><a href="#local-6989586621679028925"><span class="hs-identifier hs-var">predicate</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">AggregationType -&gt; Token -&gt; Aggregator
+</span><a href="RaskellCore.html#kqv"><span class="hs-identifier hs-var hs-var">kqv</span></a></span></span><span> </span><span id="local-6989586621679029024"><span class="annot"><span class="annottext">Token
+</span><a href="#local-6989586621679029024"><span class="hs-identifier hs-var">filler</span></a></span></span><span> </span><span id="local-6989586621679029025"><span class="annot"><span class="annottext">AggregationType
+</span><a href="#local-6989586621679029025"><span class="hs-identifier hs-var">agg</span></a></span></span><span> </span><span id="local-6989586621679029026"><span class="annot"><span class="annottext">Keys
+</span><a href="#local-6989586621679029026"><span class="hs-identifier hs-var">keys</span></a></span></span><span> </span><span id="local-6989586621679029027"><span class="annot"><span class="annottext">Keys
+</span><a href="#local-6989586621679029027"><span class="hs-identifier hs-var">queries</span></a></span></span><span> </span><span id="local-6989586621679029028"><span class="annot"><span class="annottext">Predicate
+</span><a href="#local-6989586621679029028"><span class="hs-identifier hs-var">predicate</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">AggregationType -&gt; Token -&gt; Aggregator
 </span><a href="RaskellCore.html#aggregate"><span class="hs-identifier hs-var">aggregate</span></a></span><span> </span><span class="annot"><span class="annottext">AggregationType
-</span><a href="#local-6989586621679028922"><span class="hs-identifier hs-var">agg</span></a></span><span> </span><span class="annot"><span class="annottext">Token
-</span><a href="#local-6989586621679028921"><span class="hs-identifier hs-var">filler</span></a></span><span> </span><span class="annot"><span class="annottext">Aggregator -&gt; Aggregator
+</span><a href="#local-6989586621679029025"><span class="hs-identifier hs-var">agg</span></a></span><span> </span><span class="annot"><span class="annottext">Token
+</span><a href="#local-6989586621679029024"><span class="hs-identifier hs-var">filler</span></a></span><span> </span><span class="annot"><span class="annottext">Aggregator -&gt; Aggregator
 forall a b. (a -&gt; b) -&gt; a -&gt; b
 </span><span class="hs-operator hs-var">$</span></span><span> </span><span class="annot"><span class="annottext">Keys -&gt; Keys -&gt; Predicate -&gt; Selector
 </span><a href="RaskellCore.html#selectCausal"><span class="hs-identifier hs-var">selectCausal</span></a></span><span> </span><span class="annot"><span class="annottext">Keys
-</span><a href="#local-6989586621679028923"><span class="hs-identifier hs-var">keys</span></a></span><span> </span><span class="annot"><span class="annottext">Keys
-</span><a href="#local-6989586621679028924"><span class="hs-identifier hs-var">queries</span></a></span><span> </span><span class="annot"><span class="annottext">Predicate
-</span><a href="#local-6989586621679028925"><span class="hs-identifier hs-var">predicate</span></a></span><span>
+</span><a href="#local-6989586621679029026"><span class="hs-identifier hs-var">keys</span></a></span><span> </span><span class="annot"><span class="annottext">Keys
+</span><a href="#local-6989586621679029027"><span class="hs-identifier hs-var">queries</span></a></span><span> </span><span class="annot"><span class="annottext">Predicate
+</span><a href="#local-6989586621679029028"><span class="hs-identifier hs-var">predicate</span></a></span><span>
 </span><span id="line-116"></span><span>
 </span><span id="line-117"></span><span class="annot"><span class="hs-comment">-- | Performs Key-Query-Value lookup with maximum aggregation of values.</span></span><span>
 </span><span id="line-118"></span><span class="annot"><a href="RaskellCore.html#maxKQV"><span class="hs-identifier hs-type">maxKQV</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="RaskellCore.html#Keys"><span class="hs-identifier hs-type">Keys</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><a href="RaskellCore.html#Queries"><span class="hs-identifier hs-type">Queries</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><a href="RaskellCore.html#Predicate"><span class="hs-identifier hs-type">Predicate</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><a href="RaskellCore.html#Values"><span class="hs-identifier hs-type">Values</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><a href="RaskellCore.html#Sequence"><span class="hs-identifier hs-type">Sequence</span></a></span><span>
@@ -136,11 +136,11 @@ forall a b. (a -&gt; b) -&gt; a -&gt; b
 </span><a href="RaskellCore.html#maxKQV"><span class="hs-identifier hs-var hs-var">maxKQV</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Token
 -&gt; AggregationType -&gt; Keys -&gt; Keys -&gt; Predicate -&gt; Keys -&gt; Keys
 </span><a href="RaskellCore.html#kqv"><span class="hs-identifier hs-var">kqv</span></a></span><span> </span><span class="annot"><span class="annottext">Token
-</span><a href="#local-6989586621679028926"><span class="hs-identifier hs-var">minInt8</span></a></span><span> </span><span class="annot"><span class="annottext">AggregationType
+</span><a href="#local-6989586621679029029"><span class="hs-identifier hs-var">minInt8</span></a></span><span> </span><span class="annot"><span class="annottext">AggregationType
 </span><a href="RaskellCore.html#Max"><span class="hs-identifier hs-var">Max</span></a></span><span>
 </span><span id="line-120"></span><span>  </span><span class="hs-keyword">where</span><span>
-</span><span id="line-121"></span><span>    </span><span id="local-6989586621679028926"><span class="annot"><span class="annottext">minInt8 :: Token
-</span><a href="#local-6989586621679028926"><span class="hs-identifier hs-var hs-var">minInt8</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Token
+</span><span id="line-121"></span><span>    </span><span id="local-6989586621679029029"><span class="annot"><span class="annottext">minInt8 :: Token
+</span><a href="#local-6989586621679029029"><span class="hs-identifier hs-var hs-var">minInt8</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Token
 forall a. Bounded a =&gt; a
 </span><span class="hs-identifier hs-var">minBound</span></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Int8</span></span><span>
 </span><span id="line-122"></span><span>
@@ -150,54 +150,54 @@ forall a. Bounded a =&gt; a
 </span><a href="RaskellCore.html#minKQV"><span class="hs-identifier hs-var hs-var">minKQV</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Token
 -&gt; AggregationType -&gt; Keys -&gt; Keys -&gt; Predicate -&gt; Keys -&gt; Keys
 </span><a href="RaskellCore.html#kqv"><span class="hs-identifier hs-var">kqv</span></a></span><span> </span><span class="annot"><span class="annottext">Token
-</span><a href="#local-6989586621679028930"><span class="hs-identifier hs-var">maxInt8</span></a></span><span> </span><span class="annot"><span class="annottext">AggregationType
+</span><a href="#local-6989586621679029033"><span class="hs-identifier hs-var">maxInt8</span></a></span><span> </span><span class="annot"><span class="annottext">AggregationType
 </span><a href="RaskellCore.html#Min"><span class="hs-identifier hs-var">Min</span></a></span><span>
 </span><span id="line-126"></span><span>  </span><span class="hs-keyword">where</span><span>
-</span><span id="line-127"></span><span>    </span><span id="local-6989586621679028930"><span class="annot"><span class="annottext">maxInt8 :: Token
-</span><a href="#local-6989586621679028930"><span class="hs-identifier hs-var hs-var">maxInt8</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Token
+</span><span id="line-127"></span><span>    </span><span id="local-6989586621679029033"><span class="annot"><span class="annottext">maxInt8 :: Token
+</span><a href="#local-6989586621679029033"><span class="hs-identifier hs-var hs-var">maxInt8</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Token
 forall a. Bounded a =&gt; a
 </span><span class="hs-identifier hs-var">maxBound</span></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Int8</span></span><span>
 </span><span id="line-128"></span><span>
-</span><span id="line-129"></span><span class="annot"><span class="hs-comment">-- | Compareis pairs of elements from sequences with a predicate subject to a causal constraint.</span></span><span>
+</span><span id="line-129"></span><span class="annot"><span class="hs-comment">-- | Compares pairs of elements from sequences with a predicate subject to a causal constraint.</span></span><span>
 </span><span id="line-130"></span><span class="annot"><a href="RaskellCore.html#selectCausal"><span class="hs-identifier hs-type">selectCausal</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="RaskellCore.html#Keys"><span class="hs-identifier hs-type">Keys</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><a href="RaskellCore.html#Queries"><span class="hs-identifier hs-type">Queries</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><a href="RaskellCore.html#Predicate"><span class="hs-identifier hs-type">Predicate</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><a href="RaskellCore.html#Selector"><span class="hs-identifier hs-type">Selector</span></a></span><span>
 </span><span id="line-131"></span><span id="selectCausal"><span class="annot"><span class="annottext">selectCausal :: Keys -&gt; Keys -&gt; Predicate -&gt; Selector
-</span><a href="RaskellCore.html#selectCausal"><span class="hs-identifier hs-var hs-var">selectCausal</span></a></span></span><span> </span><span id="local-6989586621679028933"><span class="annot"><span class="annottext">Keys
-</span><a href="#local-6989586621679028933"><span class="hs-identifier hs-var">keys</span></a></span></span><span> </span><span id="local-6989586621679028934"><span class="annot"><span class="annottext">Keys
-</span><a href="#local-6989586621679028934"><span class="hs-identifier hs-var">queries</span></a></span></span><span> </span><span id="local-6989586621679028935"><span class="annot"><span class="annottext">Predicate
-</span><a href="#local-6989586621679028935"><span class="hs-identifier hs-var">predicate</span></a></span></span><span> </span><span class="hs-glyph">=</span><span>
+</span><a href="RaskellCore.html#selectCausal"><span class="hs-identifier hs-var hs-var">selectCausal</span></a></span></span><span> </span><span id="local-6989586621679029036"><span class="annot"><span class="annottext">Keys
+</span><a href="#local-6989586621679029036"><span class="hs-identifier hs-var">keys</span></a></span></span><span> </span><span id="local-6989586621679029037"><span class="annot"><span class="annottext">Keys
+</span><a href="#local-6989586621679029037"><span class="hs-identifier hs-var">queries</span></a></span></span><span> </span><span id="local-6989586621679029038"><span class="annot"><span class="annottext">Predicate
+</span><a href="#local-6989586621679029038"><span class="hs-identifier hs-var">predicate</span></a></span></span><span> </span><span class="hs-glyph">=</span><span>
 </span><span id="line-132"></span><span>  </span><span class="hs-special">[</span><span> </span><span class="hs-special">[</span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Int
-</span><a href="#local-6989586621679028936"><span class="hs-identifier hs-var">keyIndex</span></a></span><span> </span><span class="annot"><span class="annottext">Int -&gt; Int -&gt; Bool
+</span><a href="#local-6989586621679029039"><span class="hs-identifier hs-var">keyIndex</span></a></span><span> </span><span class="annot"><span class="annottext">Int -&gt; Int -&gt; Bool
 forall a. Ord a =&gt; a -&gt; a -&gt; Bool
 </span><span class="hs-operator hs-var">&lt;=</span></span><span> </span><span class="annot"><span class="annottext">Int
-</span><a href="#local-6989586621679028938"><span class="hs-identifier hs-var">queryIndex</span></a></span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">Bool -&gt; Bool -&gt; Bool
+</span><a href="#local-6989586621679029041"><span class="hs-identifier hs-var">queryIndex</span></a></span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">Bool -&gt; Bool -&gt; Bool
 </span><span class="hs-operator hs-var">&amp;&amp;</span></span><span> </span><span class="annot"><span class="annottext">Predicate
-</span><a href="#local-6989586621679028935"><span class="hs-identifier hs-var">predicate</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Keys
-</span><a href="#local-6989586621679028933"><span class="hs-identifier hs-var">keys</span></a></span><span> </span><span class="annot"><span class="annottext">Keys -&gt; Int -&gt; Token
+</span><a href="#local-6989586621679029038"><span class="hs-identifier hs-var">predicate</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Keys
+</span><a href="#local-6989586621679029036"><span class="hs-identifier hs-var">keys</span></a></span><span> </span><span class="annot"><span class="annottext">Keys -&gt; Int -&gt; Token
 forall a. HasCallStack =&gt; [a] -&gt; Int -&gt; a
 </span><span class="hs-operator hs-var">!!</span></span><span> </span><span class="annot"><span class="annottext">Int
-</span><a href="#local-6989586621679028936"><span class="hs-identifier hs-var">keyIndex</span></a></span><span class="hs-special">)</span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Keys
-</span><a href="#local-6989586621679028934"><span class="hs-identifier hs-var">queries</span></a></span><span> </span><span class="annot"><span class="annottext">Keys -&gt; Int -&gt; Token
+</span><a href="#local-6989586621679029039"><span class="hs-identifier hs-var">keyIndex</span></a></span><span class="hs-special">)</span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Keys
+</span><a href="#local-6989586621679029037"><span class="hs-identifier hs-var">queries</span></a></span><span> </span><span class="annot"><span class="annottext">Keys -&gt; Int -&gt; Token
 forall a. HasCallStack =&gt; [a] -&gt; Int -&gt; a
 </span><span class="hs-operator hs-var">!!</span></span><span> </span><span class="annot"><span class="annottext">Int
-</span><a href="#local-6989586621679028938"><span class="hs-identifier hs-var">queryIndex</span></a></span><span class="hs-special">)</span><span>
-</span><span id="line-133"></span><span>      </span><span class="hs-glyph">|</span><span> </span><span id="local-6989586621679028936"><span class="annot"><span class="annottext">Int
-</span><a href="#local-6989586621679028936"><span class="hs-identifier hs-var">keyIndex</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="hs-special">[</span><span class="annot"><span class="annottext">Int
+</span><a href="#local-6989586621679029041"><span class="hs-identifier hs-var">queryIndex</span></a></span><span class="hs-special">)</span><span>
+</span><span id="line-133"></span><span>      </span><span class="hs-glyph">|</span><span> </span><span id="local-6989586621679029039"><span class="annot"><span class="annottext">Int
+</span><a href="#local-6989586621679029039"><span class="hs-identifier hs-var">keyIndex</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="hs-special">[</span><span class="annot"><span class="annottext">Int
 </span><span class="hs-number">0</span></span><span> </span><span class="hs-glyph">..</span><span> </span><span class="annot"><span class="annottext">Keys -&gt; Int
 forall a. [a] -&gt; Int
 forall (t :: * -&gt; *) a. Foldable t =&gt; t a -&gt; Int
 </span><span class="hs-identifier hs-var">length</span></span><span> </span><span class="annot"><span class="annottext">Keys
-</span><a href="#local-6989586621679028933"><span class="hs-identifier hs-var">keys</span></a></span><span> </span><span class="annot"><span class="annottext">Int -&gt; Int -&gt; Int
+</span><a href="#local-6989586621679029036"><span class="hs-identifier hs-var">keys</span></a></span><span> </span><span class="annot"><span class="annottext">Int -&gt; Int -&gt; Int
 forall a. Num a =&gt; a -&gt; a -&gt; a
 </span><span class="hs-glyph hs-var">-</span></span><span> </span><span class="annot"><span class="annottext">Int
 </span><span class="hs-number">1</span></span><span class="hs-special">]</span><span>
 </span><span id="line-134"></span><span>    </span><span class="hs-special">]</span><span>
-</span><span id="line-135"></span><span>    </span><span class="hs-glyph">|</span><span> </span><span id="local-6989586621679028938"><span class="annot"><span class="annottext">Int
-</span><a href="#local-6989586621679028938"><span class="hs-identifier hs-var">queryIndex</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="hs-special">[</span><span class="annot"><span class="annottext">Int
+</span><span id="line-135"></span><span>    </span><span class="hs-glyph">|</span><span> </span><span id="local-6989586621679029041"><span class="annot"><span class="annottext">Int
+</span><a href="#local-6989586621679029041"><span class="hs-identifier hs-var">queryIndex</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="hs-special">[</span><span class="annot"><span class="annottext">Int
 </span><span class="hs-number">0</span></span><span> </span><span class="hs-glyph">..</span><span> </span><span class="annot"><span class="annottext">Keys -&gt; Int
 forall a. [a] -&gt; Int
 forall (t :: * -&gt; *) a. Foldable t =&gt; t a -&gt; Int
 </span><span class="hs-identifier hs-var">length</span></span><span> </span><span class="annot"><span class="annottext">Keys
-</span><a href="#local-6989586621679028934"><span class="hs-identifier hs-var">queries</span></a></span><span> </span><span class="annot"><span class="annottext">Int -&gt; Int -&gt; Int
+</span><a href="#local-6989586621679029037"><span class="hs-identifier hs-var">queries</span></a></span><span> </span><span class="annot"><span class="annottext">Int -&gt; Int -&gt; Int
 forall a. Num a =&gt; a -&gt; a -&gt; a
 </span><span class="hs-glyph hs-var">-</span></span><span> </span><span class="annot"><span class="annottext">Int
 </span><span class="hs-number">1</span></span><span class="hs-special">]</span><span>
@@ -218,15 +218,15 @@ forall (t :: * -&gt; *) a. Foldable t =&gt; t a -&gt; Int
 </span><span id="line-142"></span><span class="annot"><span class="hs-comment">-- | Extracts the indices of the elements in a sequence.</span></span><span>
 </span><span id="line-143"></span><span class="annot"><a href="RaskellCore.html#indicesOf"><span class="hs-identifier hs-type">indicesOf</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="RaskellCore.html#Sequence"><span class="hs-identifier hs-type">Sequence</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><a href="RaskellCore.html#Sequence"><span class="hs-identifier hs-type">Sequence</span></a></span><span>
 </span><span id="line-144"></span><span id="indicesOf"><span class="annot"><span class="annottext">indicesOf :: Keys -&gt; Keys
-</span><a href="RaskellCore.html#indicesOf"><span class="hs-identifier hs-var hs-var">indicesOf</span></a></span></span><span> </span><span id="local-6989586621679028944"><span class="annot"><span class="annottext">Keys
-</span><a href="#local-6989586621679028944"><span class="hs-identifier hs-var">x</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-special">[</span><span class="annot"><span class="annottext">Token
+</span><a href="RaskellCore.html#indicesOf"><span class="hs-identifier hs-var hs-var">indicesOf</span></a></span></span><span> </span><span id="local-6989586621679029047"><span class="annot"><span class="annottext">Keys
+</span><a href="#local-6989586621679029047"><span class="hs-identifier hs-var">x</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-special">[</span><span class="annot"><span class="annottext">Token
 </span><span class="hs-number">0</span></span><span> </span><span class="hs-glyph">..</span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Int -&gt; Token
 forall a b. (Integral a, Num b) =&gt; a -&gt; b
 </span><span class="hs-identifier hs-var">fromIntegral</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Keys -&gt; Int
 forall a. [a] -&gt; Int
 forall (t :: * -&gt; *) a. Foldable t =&gt; t a -&gt; Int
 </span><span class="hs-identifier hs-var">length</span></span><span> </span><span class="annot"><span class="annottext">Keys
-</span><a href="#local-6989586621679028944"><span class="hs-identifier hs-var">x</span></a></span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">Token -&gt; Token -&gt; Token
+</span><a href="#local-6989586621679029047"><span class="hs-identifier hs-var">x</span></a></span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">Token -&gt; Token -&gt; Token
 forall a. Num a =&gt; a -&gt; a -&gt; a
 </span><span class="hs-glyph hs-var">-</span></span><span> </span><span class="annot"><span class="annottext">Token
 </span><span class="hs-number">1</span></span><span class="hs-special">)</span><span class="hs-special">]</span><span>
@@ -250,172 +250,172 @@ forall a. Num a =&gt; a -&gt; a -&gt; a
 </span><span id="line-155"></span><span class="annot"><span class="hs-comment">-- | Aggregates values by selecting the largest value.</span></span><span>
 </span><span id="line-156"></span><span class="annot"><a href="RaskellCore.html#aggrMax"><span class="hs-identifier hs-type">aggrMax</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="RaskellCore.html#Token"><span class="hs-identifier hs-type">Token</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><a href="RaskellCore.html#Aggregator"><span class="hs-identifier hs-type">Aggregator</span></a></span><span>
 </span><span id="line-157"></span><span id="aggrMax"><span class="annot"><span class="annottext">aggrMax :: Token -&gt; Aggregator
-</span><a href="RaskellCore.html#aggrMax"><span class="hs-identifier hs-var hs-var">aggrMax</span></a></span></span><span> </span><span id="local-6989586621679028945"><span class="annot"><span class="annottext">Token
-</span><a href="#local-6989586621679028945"><span class="hs-identifier hs-var">filler</span></a></span></span><span> </span><span id="local-6989586621679028946"><span class="annot"><span class="annottext">Selector
-</span><a href="#local-6989586621679028946"><span class="hs-identifier hs-var">a</span></a></span></span><span> </span><span id="local-6989586621679028947"><span class="annot"><span class="annottext">Keys
-</span><a href="#local-6989586621679028947"><span class="hs-identifier hs-var">v</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">([Bool] -&gt; Token) -&gt; Selector -&gt; Keys
+</span><a href="RaskellCore.html#aggrMax"><span class="hs-identifier hs-var hs-var">aggrMax</span></a></span></span><span> </span><span id="local-6989586621679029048"><span class="annot"><span class="annottext">Token
+</span><a href="#local-6989586621679029048"><span class="hs-identifier hs-var">filler</span></a></span></span><span> </span><span id="local-6989586621679029049"><span class="annot"><span class="annottext">Selector
+</span><a href="#local-6989586621679029049"><span class="hs-identifier hs-var">a</span></a></span></span><span> </span><span id="local-6989586621679029050"><span class="annot"><span class="annottext">Keys
+</span><a href="#local-6989586621679029050"><span class="hs-identifier hs-var">v</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">([Bool] -&gt; Token) -&gt; Selector -&gt; Keys
 forall a b. (a -&gt; b) -&gt; [a] -&gt; [b]
 </span><span class="hs-identifier hs-var">map</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Token -&gt; Keys -&gt; [Bool] -&gt; Token
 </span><a href="RaskellCore.html#aggrMaxByRow"><span class="hs-identifier hs-var">aggrMaxByRow</span></a></span><span> </span><span class="annot"><span class="annottext">Token
-</span><a href="#local-6989586621679028945"><span class="hs-identifier hs-var">filler</span></a></span><span> </span><span class="annot"><span class="annottext">Keys
-</span><a href="#local-6989586621679028947"><span class="hs-identifier hs-var">v</span></a></span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">Selector
-</span><a href="#local-6989586621679028946"><span class="hs-identifier hs-var">a</span></a></span><span>
+</span><a href="#local-6989586621679029048"><span class="hs-identifier hs-var">filler</span></a></span><span> </span><span class="annot"><span class="annottext">Keys
+</span><a href="#local-6989586621679029050"><span class="hs-identifier hs-var">v</span></a></span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">Selector
+</span><a href="#local-6989586621679029049"><span class="hs-identifier hs-var">a</span></a></span><span>
 </span><span id="line-158"></span><span>
 </span><span id="line-159"></span><span class="annot"><span class="hs-comment">-- | Aggregates values by taking the mean.</span></span><span>
 </span><span id="line-160"></span><span class="annot"><a href="RaskellCore.html#aggrMean"><span class="hs-identifier hs-type">aggrMean</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="RaskellCore.html#Token"><span class="hs-identifier hs-type">Token</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><a href="RaskellCore.html#Aggregator"><span class="hs-identifier hs-type">Aggregator</span></a></span><span>
 </span><span id="line-161"></span><span id="aggrMean"><span class="annot"><span class="annottext">aggrMean :: Token -&gt; Aggregator
-</span><a href="RaskellCore.html#aggrMean"><span class="hs-identifier hs-var hs-var">aggrMean</span></a></span></span><span> </span><span id="local-6989586621679028949"><span class="annot"><span class="annottext">Token
-</span><a href="#local-6989586621679028949"><span class="hs-identifier hs-var">filler</span></a></span></span><span> </span><span id="local-6989586621679028950"><span class="annot"><span class="annottext">Selector
-</span><a href="#local-6989586621679028950"><span class="hs-identifier hs-var">a</span></a></span></span><span> </span><span id="local-6989586621679028951"><span class="annot"><span class="annottext">Keys
-</span><a href="#local-6989586621679028951"><span class="hs-identifier hs-var">v</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">([Bool] -&gt; Token) -&gt; Selector -&gt; Keys
+</span><a href="RaskellCore.html#aggrMean"><span class="hs-identifier hs-var hs-var">aggrMean</span></a></span></span><span> </span><span id="local-6989586621679029052"><span class="annot"><span class="annottext">Token
+</span><a href="#local-6989586621679029052"><span class="hs-identifier hs-var">filler</span></a></span></span><span> </span><span id="local-6989586621679029053"><span class="annot"><span class="annottext">Selector
+</span><a href="#local-6989586621679029053"><span class="hs-identifier hs-var">a</span></a></span></span><span> </span><span id="local-6989586621679029054"><span class="annot"><span class="annottext">Keys
+</span><a href="#local-6989586621679029054"><span class="hs-identifier hs-var">v</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">([Bool] -&gt; Token) -&gt; Selector -&gt; Keys
 forall a b. (a -&gt; b) -&gt; [a] -&gt; [b]
 </span><span class="hs-identifier hs-var">map</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Token -&gt; Keys -&gt; [Bool] -&gt; Token
 </span><a href="RaskellCore.html#aggrMeanByRow"><span class="hs-identifier hs-var">aggrMeanByRow</span></a></span><span> </span><span class="annot"><span class="annottext">Token
-</span><a href="#local-6989586621679028949"><span class="hs-identifier hs-var">filler</span></a></span><span> </span><span class="annot"><span class="annottext">Keys
-</span><a href="#local-6989586621679028951"><span class="hs-identifier hs-var">v</span></a></span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">Selector
-</span><a href="#local-6989586621679028950"><span class="hs-identifier hs-var">a</span></a></span><span>
+</span><a href="#local-6989586621679029052"><span class="hs-identifier hs-var">filler</span></a></span><span> </span><span class="annot"><span class="annottext">Keys
+</span><a href="#local-6989586621679029054"><span class="hs-identifier hs-var">v</span></a></span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">Selector
+</span><a href="#local-6989586621679029053"><span class="hs-identifier hs-var">a</span></a></span><span>
 </span><span id="line-162"></span><span>
 </span><span id="line-163"></span><span class="annot"><span class="hs-comment">-- | Aggregates values by selecting the smallest value.</span></span><span>
 </span><span id="line-164"></span><span class="annot"><a href="RaskellCore.html#aggrMin"><span class="hs-identifier hs-type">aggrMin</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="RaskellCore.html#Token"><span class="hs-identifier hs-type">Token</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><a href="RaskellCore.html#Aggregator"><span class="hs-identifier hs-type">Aggregator</span></a></span><span>
 </span><span id="line-165"></span><span id="aggrMin"><span class="annot"><span class="annottext">aggrMin :: Token -&gt; Aggregator
-</span><a href="RaskellCore.html#aggrMin"><span class="hs-identifier hs-var hs-var">aggrMin</span></a></span></span><span> </span><span id="local-6989586621679028953"><span class="annot"><span class="annottext">Token
-</span><a href="#local-6989586621679028953"><span class="hs-identifier hs-var">filler</span></a></span></span><span> </span><span id="local-6989586621679028954"><span class="annot"><span class="annottext">Selector
-</span><a href="#local-6989586621679028954"><span class="hs-identifier hs-var">a</span></a></span></span><span> </span><span id="local-6989586621679028955"><span class="annot"><span class="annottext">Keys
-</span><a href="#local-6989586621679028955"><span class="hs-identifier hs-var">v</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">([Bool] -&gt; Token) -&gt; Selector -&gt; Keys
+</span><a href="RaskellCore.html#aggrMin"><span class="hs-identifier hs-var hs-var">aggrMin</span></a></span></span><span> </span><span id="local-6989586621679029056"><span class="annot"><span class="annottext">Token
+</span><a href="#local-6989586621679029056"><span class="hs-identifier hs-var">filler</span></a></span></span><span> </span><span id="local-6989586621679029057"><span class="annot"><span class="annottext">Selector
+</span><a href="#local-6989586621679029057"><span class="hs-identifier hs-var">a</span></a></span></span><span> </span><span id="local-6989586621679029058"><span class="annot"><span class="annottext">Keys
+</span><a href="#local-6989586621679029058"><span class="hs-identifier hs-var">v</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">([Bool] -&gt; Token) -&gt; Selector -&gt; Keys
 forall a b. (a -&gt; b) -&gt; [a] -&gt; [b]
 </span><span class="hs-identifier hs-var">map</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Token -&gt; Keys -&gt; [Bool] -&gt; Token
 </span><a href="RaskellCore.html#aggrMinByRow"><span class="hs-identifier hs-var">aggrMinByRow</span></a></span><span> </span><span class="annot"><span class="annottext">Token
-</span><a href="#local-6989586621679028953"><span class="hs-identifier hs-var">filler</span></a></span><span> </span><span class="annot"><span class="annottext">Keys
-</span><a href="#local-6989586621679028955"><span class="hs-identifier hs-var">v</span></a></span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">Selector
-</span><a href="#local-6989586621679028954"><span class="hs-identifier hs-var">a</span></a></span><span>
+</span><a href="#local-6989586621679029056"><span class="hs-identifier hs-var">filler</span></a></span><span> </span><span class="annot"><span class="annottext">Keys
+</span><a href="#local-6989586621679029058"><span class="hs-identifier hs-var">v</span></a></span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">Selector
+</span><a href="#local-6989586621679029057"><span class="hs-identifier hs-var">a</span></a></span><span>
 </span><span id="line-166"></span><span>
 </span><span id="line-167"></span><span class="annot"><a href="RaskellCore.html#aggrMaxByRow"><span class="hs-identifier hs-type">aggrMaxByRow</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="RaskellCore.html#Token"><span class="hs-identifier hs-type">Token</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><a href="RaskellCore.html#Sequence"><span class="hs-identifier hs-type">Sequence</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><a href="RaskellCore.html#BoolSequence"><span class="hs-identifier hs-type">BoolSequence</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><a href="RaskellCore.html#Token"><span class="hs-identifier hs-type">Token</span></a></span><span>
 </span><span id="line-168"></span><span id="aggrMaxByRow"><span class="annot"><span class="annottext">aggrMaxByRow :: Token -&gt; Keys -&gt; [Bool] -&gt; Token
-</span><a href="RaskellCore.html#aggrMaxByRow"><span class="hs-identifier hs-var hs-var">aggrMaxByRow</span></a></span></span><span> </span><span id="local-6989586621679028957"><span class="annot"><span class="annottext">Token
-</span><a href="#local-6989586621679028957"><span class="hs-identifier hs-var">filler</span></a></span></span><span> </span><span id="local-6989586621679028958"><span class="annot"><span class="annottext">Keys
-</span><a href="#local-6989586621679028958"><span class="hs-identifier hs-var">v</span></a></span></span><span> </span><span id="local-6989586621679028959"><span class="annot"><span class="annottext">[Bool]
-</span><a href="#local-6989586621679028959"><span class="hs-identifier hs-var">a</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Token -&gt; Maybe Token -&gt; Token
+</span><a href="RaskellCore.html#aggrMaxByRow"><span class="hs-identifier hs-var hs-var">aggrMaxByRow</span></a></span></span><span> </span><span id="local-6989586621679029060"><span class="annot"><span class="annottext">Token
+</span><a href="#local-6989586621679029060"><span class="hs-identifier hs-var">filler</span></a></span></span><span> </span><span id="local-6989586621679029061"><span class="annot"><span class="annottext">Keys
+</span><a href="#local-6989586621679029061"><span class="hs-identifier hs-var">v</span></a></span></span><span> </span><span id="local-6989586621679029062"><span class="annot"><span class="annottext">[Bool]
+</span><a href="#local-6989586621679029062"><span class="hs-identifier hs-var">a</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Token -&gt; Maybe Token -&gt; Token
 forall a. a -&gt; Maybe a -&gt; a
 </span><span class="hs-identifier hs-var">fromMaybe</span></span><span> </span><span class="annot"><span class="annottext">Token
-</span><a href="#local-6989586621679028957"><span class="hs-identifier hs-var">filler</span></a></span><span> </span><span class="annot"><span class="annottext">Maybe Token
-</span><a href="#local-6989586621679028960"><span class="hs-identifier hs-var">maybeMax</span></a></span><span>
+</span><a href="#local-6989586621679029060"><span class="hs-identifier hs-var">filler</span></a></span><span> </span><span class="annot"><span class="annottext">Maybe Token
+</span><a href="#local-6989586621679029063"><span class="hs-identifier hs-var">maybeMax</span></a></span><span>
 </span><span id="line-169"></span><span>  </span><span class="hs-keyword">where</span><span>
-</span><span id="line-170"></span><span>    </span><span id="local-6989586621679028960"><span class="annot"><span class="annottext">maybeMax :: Maybe Token
-</span><a href="#local-6989586621679028960"><span class="hs-identifier hs-var hs-var">maybeMax</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Keys -&gt; Maybe Token
+</span><span id="line-170"></span><span>    </span><span id="local-6989586621679029063"><span class="annot"><span class="annottext">maybeMax :: Maybe Token
+</span><a href="#local-6989586621679029063"><span class="hs-identifier hs-var hs-var">maybeMax</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Keys -&gt; Maybe Token
 forall a. Ord a =&gt; [a] -&gt; Maybe a
 </span><a href="RaskellCore.html#safeMaximum"><span class="hs-identifier hs-var">safeMaximum</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">[Bool] -&gt; Keys -&gt; Keys
 forall a. [Bool] -&gt; [a] -&gt; [a]
 </span><a href="RaskellCore.html#filterByList"><span class="hs-identifier hs-var">filterByList</span></a></span><span> </span><span class="annot"><span class="annottext">[Bool]
-</span><a href="#local-6989586621679028959"><span class="hs-identifier hs-var">a</span></a></span><span> </span><span class="annot"><span class="annottext">Keys
-</span><a href="#local-6989586621679028958"><span class="hs-identifier hs-var">v</span></a></span><span class="hs-special">)</span><span>
+</span><a href="#local-6989586621679029062"><span class="hs-identifier hs-var">a</span></a></span><span> </span><span class="annot"><span class="annottext">Keys
+</span><a href="#local-6989586621679029061"><span class="hs-identifier hs-var">v</span></a></span><span class="hs-special">)</span><span>
 </span><span id="line-171"></span><span>
 </span><span id="line-172"></span><span class="annot"><a href="RaskellCore.html#aggrMeanByRow"><span class="hs-identifier hs-type">aggrMeanByRow</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="RaskellCore.html#Token"><span class="hs-identifier hs-type">Token</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><a href="RaskellCore.html#Sequence"><span class="hs-identifier hs-type">Sequence</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><a href="RaskellCore.html#BoolSequence"><span class="hs-identifier hs-type">BoolSequence</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><a href="RaskellCore.html#Token"><span class="hs-identifier hs-type">Token</span></a></span><span>
 </span><span id="line-173"></span><span id="aggrMeanByRow"><span class="annot"><span class="annottext">aggrMeanByRow :: Token -&gt; Keys -&gt; [Bool] -&gt; Token
-</span><a href="RaskellCore.html#aggrMeanByRow"><span class="hs-identifier hs-var hs-var">aggrMeanByRow</span></a></span></span><span> </span><span id="local-6989586621679028965"><span class="annot"><span class="annottext">Token
-</span><a href="#local-6989586621679028965"><span class="hs-identifier hs-var">filler</span></a></span></span><span> </span><span id="local-6989586621679028966"><span class="annot"><span class="annottext">Keys
-</span><a href="#local-6989586621679028966"><span class="hs-identifier hs-var">v</span></a></span></span><span> </span><span id="local-6989586621679028967"><span class="annot"><span class="annottext">[Bool]
-</span><a href="#local-6989586621679028967"><span class="hs-identifier hs-var">a</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Token -&gt; Maybe Token -&gt; Token
+</span><a href="RaskellCore.html#aggrMeanByRow"><span class="hs-identifier hs-var hs-var">aggrMeanByRow</span></a></span></span><span> </span><span id="local-6989586621679029068"><span class="annot"><span class="annottext">Token
+</span><a href="#local-6989586621679029068"><span class="hs-identifier hs-var">filler</span></a></span></span><span> </span><span id="local-6989586621679029069"><span class="annot"><span class="annottext">Keys
+</span><a href="#local-6989586621679029069"><span class="hs-identifier hs-var">v</span></a></span></span><span> </span><span id="local-6989586621679029070"><span class="annot"><span class="annottext">[Bool]
+</span><a href="#local-6989586621679029070"><span class="hs-identifier hs-var">a</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Token -&gt; Maybe Token -&gt; Token
 forall a. a -&gt; Maybe a -&gt; a
 </span><span class="hs-identifier hs-var">fromMaybe</span></span><span> </span><span class="annot"><span class="annottext">Token
-</span><a href="#local-6989586621679028965"><span class="hs-identifier hs-var">filler</span></a></span><span> </span><span class="annot"><span class="annottext">Maybe Token
-</span><a href="#local-6989586621679028968"><span class="hs-identifier hs-var">maybeMean</span></a></span><span>
+</span><a href="#local-6989586621679029068"><span class="hs-identifier hs-var">filler</span></a></span><span> </span><span class="annot"><span class="annottext">Maybe Token
+</span><a href="#local-6989586621679029071"><span class="hs-identifier hs-var">maybeMean</span></a></span><span>
 </span><span id="line-174"></span><span>  </span><span class="hs-keyword">where</span><span>
-</span><span id="line-175"></span><span>    </span><span id="local-6989586621679028968"><span class="annot"><span class="annottext">maybeMean :: Maybe Token
-</span><a href="#local-6989586621679028968"><span class="hs-identifier hs-var hs-var">maybeMean</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Keys -&gt; Maybe Token
+</span><span id="line-175"></span><span>    </span><span id="local-6989586621679029071"><span class="annot"><span class="annottext">maybeMean :: Maybe Token
+</span><a href="#local-6989586621679029071"><span class="hs-identifier hs-var hs-var">maybeMean</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Keys -&gt; Maybe Token
 </span><a href="RaskellCore.html#safeInt8Mean"><span class="hs-identifier hs-var">safeInt8Mean</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">[Bool] -&gt; Keys -&gt; Keys
 forall a. [Bool] -&gt; [a] -&gt; [a]
 </span><a href="RaskellCore.html#filterByList"><span class="hs-identifier hs-var">filterByList</span></a></span><span> </span><span class="annot"><span class="annottext">[Bool]
-</span><a href="#local-6989586621679028967"><span class="hs-identifier hs-var">a</span></a></span><span> </span><span class="annot"><span class="annottext">Keys
-</span><a href="#local-6989586621679028966"><span class="hs-identifier hs-var">v</span></a></span><span class="hs-special">)</span><span>
+</span><a href="#local-6989586621679029070"><span class="hs-identifier hs-var">a</span></a></span><span> </span><span class="annot"><span class="annottext">Keys
+</span><a href="#local-6989586621679029069"><span class="hs-identifier hs-var">v</span></a></span><span class="hs-special">)</span><span>
 </span><span id="line-176"></span><span>
 </span><span id="line-177"></span><span class="annot"><a href="RaskellCore.html#aggrMinByRow"><span class="hs-identifier hs-type">aggrMinByRow</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="RaskellCore.html#Token"><span class="hs-identifier hs-type">Token</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><a href="RaskellCore.html#Sequence"><span class="hs-identifier hs-type">Sequence</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><a href="RaskellCore.html#BoolSequence"><span class="hs-identifier hs-type">BoolSequence</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><a href="RaskellCore.html#Token"><span class="hs-identifier hs-type">Token</span></a></span><span>
 </span><span id="line-178"></span><span id="aggrMinByRow"><span class="annot"><span class="annottext">aggrMinByRow :: Token -&gt; Keys -&gt; [Bool] -&gt; Token
-</span><a href="RaskellCore.html#aggrMinByRow"><span class="hs-identifier hs-var hs-var">aggrMinByRow</span></a></span></span><span> </span><span id="local-6989586621679028970"><span class="annot"><span class="annottext">Token
-</span><a href="#local-6989586621679028970"><span class="hs-identifier hs-var">filler</span></a></span></span><span> </span><span id="local-6989586621679028971"><span class="annot"><span class="annottext">Keys
-</span><a href="#local-6989586621679028971"><span class="hs-identifier hs-var">v</span></a></span></span><span> </span><span id="local-6989586621679028972"><span class="annot"><span class="annottext">[Bool]
-</span><a href="#local-6989586621679028972"><span class="hs-identifier hs-var">a</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Token -&gt; Maybe Token -&gt; Token
+</span><a href="RaskellCore.html#aggrMinByRow"><span class="hs-identifier hs-var hs-var">aggrMinByRow</span></a></span></span><span> </span><span id="local-6989586621679029073"><span class="annot"><span class="annottext">Token
+</span><a href="#local-6989586621679029073"><span class="hs-identifier hs-var">filler</span></a></span></span><span> </span><span id="local-6989586621679029074"><span class="annot"><span class="annottext">Keys
+</span><a href="#local-6989586621679029074"><span class="hs-identifier hs-var">v</span></a></span></span><span> </span><span id="local-6989586621679029075"><span class="annot"><span class="annottext">[Bool]
+</span><a href="#local-6989586621679029075"><span class="hs-identifier hs-var">a</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Token -&gt; Maybe Token -&gt; Token
 forall a. a -&gt; Maybe a -&gt; a
 </span><span class="hs-identifier hs-var">fromMaybe</span></span><span> </span><span class="annot"><span class="annottext">Token
-</span><a href="#local-6989586621679028970"><span class="hs-identifier hs-var">filler</span></a></span><span> </span><span class="annot"><span class="annottext">Maybe Token
-</span><a href="#local-6989586621679028973"><span class="hs-identifier hs-var">maybeMin</span></a></span><span>
+</span><a href="#local-6989586621679029073"><span class="hs-identifier hs-var">filler</span></a></span><span> </span><span class="annot"><span class="annottext">Maybe Token
+</span><a href="#local-6989586621679029076"><span class="hs-identifier hs-var">maybeMin</span></a></span><span>
 </span><span id="line-179"></span><span>  </span><span class="hs-keyword">where</span><span>
-</span><span id="line-180"></span><span>    </span><span id="local-6989586621679028973"><span class="annot"><span class="annottext">maybeMin :: Maybe Token
-</span><a href="#local-6989586621679028973"><span class="hs-identifier hs-var hs-var">maybeMin</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Keys -&gt; Maybe Token
+</span><span id="line-180"></span><span>    </span><span id="local-6989586621679029076"><span class="annot"><span class="annottext">maybeMin :: Maybe Token
+</span><a href="#local-6989586621679029076"><span class="hs-identifier hs-var hs-var">maybeMin</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Keys -&gt; Maybe Token
 forall a. Ord a =&gt; [a] -&gt; Maybe a
 </span><a href="RaskellCore.html#safeMinimum"><span class="hs-identifier hs-var">safeMinimum</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">[Bool] -&gt; Keys -&gt; Keys
 forall a. [Bool] -&gt; [a] -&gt; [a]
 </span><a href="RaskellCore.html#filterByList"><span class="hs-identifier hs-var">filterByList</span></a></span><span> </span><span class="annot"><span class="annottext">[Bool]
-</span><a href="#local-6989586621679028972"><span class="hs-identifier hs-var">a</span></a></span><span> </span><span class="annot"><span class="annottext">Keys
-</span><a href="#local-6989586621679028971"><span class="hs-identifier hs-var">v</span></a></span><span class="hs-special">)</span><span>
+</span><a href="#local-6989586621679029075"><span class="hs-identifier hs-var">a</span></a></span><span> </span><span class="annot"><span class="annottext">Keys
+</span><a href="#local-6989586621679029074"><span class="hs-identifier hs-var">v</span></a></span><span class="hs-special">)</span><span>
 </span><span id="line-181"></span><span>
-</span><span id="line-182"></span><span id="local-6989586621679028843"><span class="annot"><a href="RaskellCore.html#filterByList"><span class="hs-identifier hs-type">filterByList</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="hs-special">[</span><span class="annot"><span class="hs-identifier hs-type">Bool</span></span><span class="hs-special">]</span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="hs-special">[</span><span class="annot"><a href="#local-6989586621679028843"><span class="hs-identifier hs-type">a</span></a></span><span class="hs-special">]</span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="hs-special">[</span><span class="annot"><a href="#local-6989586621679028843"><span class="hs-identifier hs-type">a</span></a></span><span class="hs-special">]</span></span><span>
+</span><span id="line-182"></span><span id="local-6989586621679028946"><span class="annot"><a href="RaskellCore.html#filterByList"><span class="hs-identifier hs-type">filterByList</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="hs-special">[</span><span class="annot"><span class="hs-identifier hs-type">Bool</span></span><span class="hs-special">]</span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="hs-special">[</span><span class="annot"><a href="#local-6989586621679028946"><span class="hs-identifier hs-type">a</span></a></span><span class="hs-special">]</span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="hs-special">[</span><span class="annot"><a href="#local-6989586621679028946"><span class="hs-identifier hs-type">a</span></a></span><span class="hs-special">]</span></span><span>
 </span><span id="line-183"></span><span id="filterByList"><span class="annot"><span class="annottext">filterByList :: forall a. [Bool] -&gt; [a] -&gt; [a]
 </span><a href="RaskellCore.html#filterByList"><span class="hs-identifier hs-var hs-var">filterByList</span></a></span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Bool
-</span><span class="hs-identifier hs-var">True</span></span><span> </span><span class="annot"><span class="hs-glyph hs-type">:</span></span><span> </span><span id="local-6989586621679028976"><span class="annot"><span class="annottext">[Bool]
-</span><a href="#local-6989586621679028976"><span class="hs-identifier hs-var">bs</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-special">(</span><span id="local-6989586621679028977"><span class="annot"><span class="annottext">a
-</span><a href="#local-6989586621679028977"><span class="hs-identifier hs-var">x</span></a></span></span><span> </span><span class="annot"><span class="hs-glyph hs-type">:</span></span><span> </span><span id="local-6989586621679028978"><span class="annot"><span class="annottext">[a]
-</span><a href="#local-6989586621679028978"><span class="hs-identifier hs-var">xs</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">a
-</span><a href="#local-6989586621679028977"><span class="hs-identifier hs-var">x</span></a></span><span> </span><span class="annot"><span class="annottext">a -&gt; [a] -&gt; [a]
+</span><span class="hs-identifier hs-var">True</span></span><span> </span><span class="annot"><span class="hs-glyph hs-type">:</span></span><span> </span><span id="local-6989586621679029079"><span class="annot"><span class="annottext">[Bool]
+</span><a href="#local-6989586621679029079"><span class="hs-identifier hs-var">bs</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-special">(</span><span id="local-6989586621679029080"><span class="annot"><span class="annottext">a
+</span><a href="#local-6989586621679029080"><span class="hs-identifier hs-var">x</span></a></span></span><span> </span><span class="annot"><span class="hs-glyph hs-type">:</span></span><span> </span><span id="local-6989586621679029081"><span class="annot"><span class="annottext">[a]
+</span><a href="#local-6989586621679029081"><span class="hs-identifier hs-var">xs</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">a
+</span><a href="#local-6989586621679029080"><span class="hs-identifier hs-var">x</span></a></span><span> </span><span class="annot"><span class="annottext">a -&gt; [a] -&gt; [a]
 forall a. a -&gt; [a] -&gt; [a]
 </span><span class="hs-glyph hs-var">:</span></span><span> </span><span class="annot"><span class="annottext">[Bool] -&gt; [a] -&gt; [a]
 forall a. [Bool] -&gt; [a] -&gt; [a]
 </span><a href="RaskellCore.html#filterByList"><span class="hs-identifier hs-var">filterByList</span></a></span><span> </span><span class="annot"><span class="annottext">[Bool]
-</span><a href="#local-6989586621679028976"><span class="hs-identifier hs-var">bs</span></a></span><span> </span><span class="annot"><span class="annottext">[a]
-</span><a href="#local-6989586621679028978"><span class="hs-identifier hs-var">xs</span></a></span><span>
+</span><a href="#local-6989586621679029079"><span class="hs-identifier hs-var">bs</span></a></span><span> </span><span class="annot"><span class="annottext">[a]
+</span><a href="#local-6989586621679029081"><span class="hs-identifier hs-var">xs</span></a></span><span>
 </span><span id="line-184"></span><span class="annot"><a href="RaskellCore.html#filterByList"><span class="hs-identifier hs-var">filterByList</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Bool
-</span><span class="hs-identifier hs-var">False</span></span><span> </span><span class="annot"><span class="hs-glyph hs-type">:</span></span><span> </span><span id="local-6989586621679028979"><span class="annot"><span class="annottext">[Bool]
-</span><a href="#local-6989586621679028979"><span class="hs-identifier hs-var">bs</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">a
-</span><span class="hs-identifier">_</span></span><span> </span><span class="annot"><span class="hs-glyph hs-type">:</span></span><span> </span><span id="local-6989586621679028980"><span class="annot"><span class="annottext">[a]
-</span><a href="#local-6989586621679028980"><span class="hs-identifier hs-var">xs</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">[Bool] -&gt; [a] -&gt; [a]
+</span><span class="hs-identifier hs-var">False</span></span><span> </span><span class="annot"><span class="hs-glyph hs-type">:</span></span><span> </span><span id="local-6989586621679029082"><span class="annot"><span class="annottext">[Bool]
+</span><a href="#local-6989586621679029082"><span class="hs-identifier hs-var">bs</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">a
+</span><span class="hs-identifier">_</span></span><span> </span><span class="annot"><span class="hs-glyph hs-type">:</span></span><span> </span><span id="local-6989586621679029083"><span class="annot"><span class="annottext">[a]
+</span><a href="#local-6989586621679029083"><span class="hs-identifier hs-var">xs</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">[Bool] -&gt; [a] -&gt; [a]
 forall a. [Bool] -&gt; [a] -&gt; [a]
 </span><a href="RaskellCore.html#filterByList"><span class="hs-identifier hs-var">filterByList</span></a></span><span> </span><span class="annot"><span class="annottext">[Bool]
-</span><a href="#local-6989586621679028979"><span class="hs-identifier hs-var">bs</span></a></span><span> </span><span class="annot"><span class="annottext">[a]
-</span><a href="#local-6989586621679028980"><span class="hs-identifier hs-var">xs</span></a></span><span>
+</span><a href="#local-6989586621679029082"><span class="hs-identifier hs-var">bs</span></a></span><span> </span><span class="annot"><span class="annottext">[a]
+</span><a href="#local-6989586621679029083"><span class="hs-identifier hs-var">xs</span></a></span><span>
 </span><span id="line-185"></span><span class="annot"><a href="RaskellCore.html#filterByList"><span class="hs-identifier hs-var">filterByList</span></a></span><span> </span><span class="annot"><span class="annottext">[Bool]
 </span><span class="hs-identifier">_</span></span><span> </span><span class="annot"><span class="annottext">[a]
 </span><span class="hs-identifier">_</span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-special">[</span><span class="hs-special">]</span><span>
 </span><span id="line-186"></span><span>
-</span><span id="line-187"></span><span id="local-6989586621679028842"><span class="annot"><a href="RaskellCore.html#safeMaximum"><span class="hs-identifier hs-type">safeMaximum</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier hs-type">Ord</span></span><span> </span><span class="annot"><a href="#local-6989586621679028842"><span class="hs-identifier hs-type">a</span></a></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=&gt;</span><span> </span><span class="hs-special">[</span><span class="annot"><a href="#local-6989586621679028842"><span class="hs-identifier hs-type">a</span></a></span><span class="hs-special">]</span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Maybe</span></span><span> </span><span class="annot"><a href="#local-6989586621679028842"><span class="hs-identifier hs-type">a</span></a></span></span><span>
+</span><span id="line-187"></span><span id="local-6989586621679028945"><span class="annot"><a href="RaskellCore.html#safeMaximum"><span class="hs-identifier hs-type">safeMaximum</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier hs-type">Ord</span></span><span> </span><span class="annot"><a href="#local-6989586621679028945"><span class="hs-identifier hs-type">a</span></a></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=&gt;</span><span> </span><span class="hs-special">[</span><span class="annot"><a href="#local-6989586621679028945"><span class="hs-identifier hs-type">a</span></a></span><span class="hs-special">]</span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Maybe</span></span><span> </span><span class="annot"><a href="#local-6989586621679028945"><span class="hs-identifier hs-type">a</span></a></span></span><span>
 </span><span id="line-188"></span><span id="safeMaximum"><span class="annot"><span class="annottext">safeMaximum :: forall a. Ord a =&gt; [a] -&gt; Maybe a
 </span><a href="RaskellCore.html#safeMaximum"><span class="hs-identifier hs-var hs-var">safeMaximum</span></a></span></span><span> </span><span class="hs-special">[</span><span class="hs-special">]</span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Maybe a
 forall a. Maybe a
 </span><span class="hs-identifier hs-var">Nothing</span></span><span>
-</span><span id="line-189"></span><span class="annot"><a href="RaskellCore.html#safeMaximum"><span class="hs-identifier hs-var">safeMaximum</span></a></span><span> </span><span id="local-6989586621679028984"><span class="annot"><span class="annottext">[a]
-</span><a href="#local-6989586621679028984"><span class="hs-identifier hs-var">xs</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">a -&gt; Maybe a
+</span><span id="line-189"></span><span class="annot"><a href="RaskellCore.html#safeMaximum"><span class="hs-identifier hs-var">safeMaximum</span></a></span><span> </span><span id="local-6989586621679029087"><span class="annot"><span class="annottext">[a]
+</span><a href="#local-6989586621679029087"><span class="hs-identifier hs-var">xs</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">a -&gt; Maybe a
 forall a. a -&gt; Maybe a
 </span><span class="hs-identifier hs-var">Just</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">[a] -&gt; a
 forall a. Ord a =&gt; [a] -&gt; a
 forall (t :: * -&gt; *) a. (Foldable t, Ord a) =&gt; t a -&gt; a
 </span><span class="hs-identifier hs-var">maximum</span></span><span> </span><span class="annot"><span class="annottext">[a]
-</span><a href="#local-6989586621679028984"><span class="hs-identifier hs-var">xs</span></a></span><span class="hs-special">)</span><span>
+</span><a href="#local-6989586621679029087"><span class="hs-identifier hs-var">xs</span></a></span><span class="hs-special">)</span><span>
 </span><span id="line-190"></span><span>
-</span><span id="line-191"></span><span id="local-6989586621679028986"><span class="annot"><a href="RaskellCore.html#safeMinimum"><span class="hs-identifier hs-type">safeMinimum</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier hs-type">Ord</span></span><span> </span><span class="annot"><a href="#local-6989586621679028986"><span class="hs-identifier hs-type">a</span></a></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=&gt;</span><span> </span><span class="hs-special">[</span><span class="annot"><a href="#local-6989586621679028986"><span class="hs-identifier hs-type">a</span></a></span><span class="hs-special">]</span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Maybe</span></span><span> </span><span class="annot"><a href="#local-6989586621679028986"><span class="hs-identifier hs-type">a</span></a></span></span><span>
+</span><span id="line-191"></span><span id="local-6989586621679029089"><span class="annot"><a href="RaskellCore.html#safeMinimum"><span class="hs-identifier hs-type">safeMinimum</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier hs-type">Ord</span></span><span> </span><span class="annot"><a href="#local-6989586621679029089"><span class="hs-identifier hs-type">a</span></a></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=&gt;</span><span> </span><span class="hs-special">[</span><span class="annot"><a href="#local-6989586621679029089"><span class="hs-identifier hs-type">a</span></a></span><span class="hs-special">]</span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Maybe</span></span><span> </span><span class="annot"><a href="#local-6989586621679029089"><span class="hs-identifier hs-type">a</span></a></span></span><span>
 </span><span id="line-192"></span><span id="safeMinimum"><span class="annot"><span class="annottext">safeMinimum :: forall a. Ord a =&gt; [a] -&gt; Maybe a
 </span><a href="RaskellCore.html#safeMinimum"><span class="hs-identifier hs-var hs-var">safeMinimum</span></a></span></span><span> </span><span class="hs-special">[</span><span class="hs-special">]</span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Maybe a
 forall a. Maybe a
 </span><span class="hs-identifier hs-var">Nothing</span></span><span>
-</span><span id="line-193"></span><span class="annot"><a href="RaskellCore.html#safeMinimum"><span class="hs-identifier hs-var">safeMinimum</span></a></span><span> </span><span id="local-6989586621679028990"><span class="annot"><span class="annottext">[a]
-</span><a href="#local-6989586621679028990"><span class="hs-identifier hs-var">xs</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">a -&gt; Maybe a
+</span><span id="line-193"></span><span class="annot"><a href="RaskellCore.html#safeMinimum"><span class="hs-identifier hs-var">safeMinimum</span></a></span><span> </span><span id="local-6989586621679029093"><span class="annot"><span class="annottext">[a]
+</span><a href="#local-6989586621679029093"><span class="hs-identifier hs-var">xs</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">a -&gt; Maybe a
 forall a. a -&gt; Maybe a
 </span><span class="hs-identifier hs-var">Just</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">[a] -&gt; a
 forall a. Ord a =&gt; [a] -&gt; a
 forall (t :: * -&gt; *) a. (Foldable t, Ord a) =&gt; t a -&gt; a
 </span><span class="hs-identifier hs-var">minimum</span></span><span> </span><span class="annot"><span class="annottext">[a]
-</span><a href="#local-6989586621679028990"><span class="hs-identifier hs-var">xs</span></a></span><span class="hs-special">)</span><span>
+</span><a href="#local-6989586621679029093"><span class="hs-identifier hs-var">xs</span></a></span><span class="hs-special">)</span><span>
 </span><span id="line-194"></span><span>
 </span><span id="line-195"></span><span class="annot"><a href="RaskellCore.html#safeInt8Mean"><span class="hs-identifier hs-type">safeInt8Mean</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="RaskellCore.html#Sequence"><span class="hs-identifier hs-type">Sequence</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Maybe</span></span><span> </span><span class="annot"><a href="RaskellCore.html#Token"><span class="hs-identifier hs-type">Token</span></a></span><span>
 </span><span id="line-196"></span><span id="safeInt8Mean"><span class="annot"><span class="annottext">safeInt8Mean :: Keys -&gt; Maybe Token
 </span><a href="RaskellCore.html#safeInt8Mean"><span class="hs-identifier hs-var hs-var">safeInt8Mean</span></a></span></span><span> </span><span class="hs-special">[</span><span class="hs-special">]</span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Maybe Token
 forall a. Maybe a
 </span><span class="hs-identifier hs-var">Nothing</span></span><span>
-</span><span id="line-197"></span><span class="annot"><a href="RaskellCore.html#safeInt8Mean"><span class="hs-identifier hs-var">safeInt8Mean</span></a></span><span> </span><span id="local-6989586621679028992"><span class="annot"><span class="annottext">Keys
-</span><a href="#local-6989586621679028992"><span class="hs-identifier hs-var">xs</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Token -&gt; Maybe Token
+</span><span id="line-197"></span><span class="annot"><a href="RaskellCore.html#safeInt8Mean"><span class="hs-identifier hs-var">safeInt8Mean</span></a></span><span> </span><span id="local-6989586621679029095"><span class="annot"><span class="annottext">Keys
+</span><a href="#local-6989586621679029095"><span class="hs-identifier hs-var">xs</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Token -&gt; Maybe Token
 forall a. a -&gt; Maybe a
 </span><span class="hs-identifier hs-var">Just</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Keys -&gt; Token
 forall a. Num a =&gt; [a] -&gt; a
 forall (t :: * -&gt; *) a. (Foldable t, Num a) =&gt; t a -&gt; a
 </span><span class="hs-identifier hs-var">sum</span></span><span> </span><span class="annot"><span class="annottext">Keys
-</span><a href="#local-6989586621679028992"><span class="hs-identifier hs-var">xs</span></a></span><span> </span><span class="annot"><span class="annottext">Token -&gt; Token -&gt; Token
+</span><a href="#local-6989586621679029095"><span class="hs-identifier hs-var">xs</span></a></span><span> </span><span class="annot"><span class="annottext">Token -&gt; Token -&gt; Token
 forall a. Integral a =&gt; a -&gt; a -&gt; a
 </span><span class="hs-operator hs-var">`div`</span></span><span> </span><span class="annot"><span class="annottext">Int -&gt; Token
 forall a b. (Integral a, Num b) =&gt; a -&gt; b
@@ -423,7 +423,7 @@ forall a b. (Integral a, Num b) =&gt; a -&gt; b
 forall a. [a] -&gt; Int
 forall (t :: * -&gt; *) a. Foldable t =&gt; t a -&gt; Int
 </span><span class="hs-identifier hs-var">length</span></span><span> </span><span class="annot"><span class="annottext">Keys
-</span><a href="#local-6989586621679028992"><span class="hs-identifier hs-var">xs</span></a></span><span class="hs-special">)</span><span class="hs-special">)</span><span>
+</span><a href="#local-6989586621679029095"><span class="hs-identifier hs-var">xs</span></a></span><span class="hs-special">)</span><span class="hs-special">)</span><span>
 </span><span id="line-198"></span><span>
 </span><span id="line-199"></span><span class="annot"><span class="hs-comment">-- | Computes the &quot;width&quot;, or number of nonzero entries, of the rows of a `Selector`.</span></span><span>
 </span><span id="line-200"></span><span class="annot"><a href="RaskellCore.html#selWidth"><span class="hs-identifier hs-type">selWidth</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="RaskellCore.html#Selector"><span class="hs-identifier hs-type">Selector</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><a href="RaskellCore.html#Sequence"><span class="hs-identifier hs-type">Sequence</span></a></span><span>
@@ -510,15 +510,15 @@ forall a b c. (a -&gt; b -&gt; c) -&gt; [a] -&gt; [b] -&gt; [c]
 </span><span id="line-248"></span><span class="annot"><span class="hs-comment">-- | Non-causal selection is included for some reason.</span></span><span>
 </span><span id="line-249"></span><span class="annot"><a href="RaskellCore.html#selectAcausal"><span class="hs-identifier hs-type">selectAcausal</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="RaskellCore.html#Keys"><span class="hs-identifier hs-type">Keys</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><a href="RaskellCore.html#Queries"><span class="hs-identifier hs-type">Queries</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><a href="RaskellCore.html#Predicate"><span class="hs-identifier hs-type">Predicate</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><a href="RaskellCore.html#Selector"><span class="hs-identifier hs-type">Selector</span></a></span><span>
 </span><span id="line-250"></span><span id="selectAcausal"><span class="annot"><span class="annottext">selectAcausal :: Keys -&gt; Keys -&gt; Predicate -&gt; Selector
-</span><a href="RaskellCore.html#selectAcausal"><span class="hs-identifier hs-var hs-var">selectAcausal</span></a></span></span><span> </span><span id="local-6989586621679028997"><span class="annot"><span class="annottext">Keys
-</span><a href="#local-6989586621679028997"><span class="hs-identifier hs-var">keys</span></a></span></span><span> </span><span id="local-6989586621679028998"><span class="annot"><span class="annottext">Keys
-</span><a href="#local-6989586621679028998"><span class="hs-identifier hs-var">queries</span></a></span></span><span> </span><span id="local-6989586621679028999"><span class="annot"><span class="annottext">Predicate
-</span><a href="#local-6989586621679028999"><span class="hs-identifier hs-var">predicate</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-special">[</span><span class="hs-special">[</span><span class="annot"><span class="annottext">Predicate
-</span><a href="#local-6989586621679028999"><span class="hs-identifier hs-var">predicate</span></a></span><span> </span><span class="annot"><span class="annottext">Token
-</span><a href="#local-6989586621679029000"><span class="hs-identifier hs-var">keyIndex</span></a></span><span> </span><span class="annot"><span class="annottext">Token
-</span><a href="#local-6989586621679029001"><span class="hs-identifier hs-var">queryIndex</span></a></span><span> </span><span class="hs-glyph">|</span><span> </span><span id="local-6989586621679029000"><span class="annot"><span class="annottext">Token
-</span><a href="#local-6989586621679029000"><span class="hs-identifier hs-var">keyIndex</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">Keys
-</span><a href="#local-6989586621679028997"><span class="hs-identifier hs-var">keys</span></a></span><span class="hs-special">]</span><span> </span><span class="hs-glyph">|</span><span> </span><span id="local-6989586621679029001"><span class="annot"><span class="annottext">Token
-</span><a href="#local-6989586621679029001"><span class="hs-identifier hs-var">queryIndex</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">Keys
-</span><a href="#local-6989586621679028998"><span class="hs-identifier hs-var">queries</span></a></span><span class="hs-special">]</span><span>
+</span><a href="RaskellCore.html#selectAcausal"><span class="hs-identifier hs-var hs-var">selectAcausal</span></a></span></span><span> </span><span id="local-6989586621679029100"><span class="annot"><span class="annottext">Keys
+</span><a href="#local-6989586621679029100"><span class="hs-identifier hs-var">keys</span></a></span></span><span> </span><span id="local-6989586621679029101"><span class="annot"><span class="annottext">Keys
+</span><a href="#local-6989586621679029101"><span class="hs-identifier hs-var">queries</span></a></span></span><span> </span><span id="local-6989586621679029102"><span class="annot"><span class="annottext">Predicate
+</span><a href="#local-6989586621679029102"><span class="hs-identifier hs-var">predicate</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-special">[</span><span class="hs-special">[</span><span class="annot"><span class="annottext">Predicate
+</span><a href="#local-6989586621679029102"><span class="hs-identifier hs-var">predicate</span></a></span><span> </span><span class="annot"><span class="annottext">Token
+</span><a href="#local-6989586621679029103"><span class="hs-identifier hs-var">keyIndex</span></a></span><span> </span><span class="annot"><span class="annottext">Token
+</span><a href="#local-6989586621679029104"><span class="hs-identifier hs-var">queryIndex</span></a></span><span> </span><span class="hs-glyph">|</span><span> </span><span id="local-6989586621679029103"><span class="annot"><span class="annottext">Token
+</span><a href="#local-6989586621679029103"><span class="hs-identifier hs-var">keyIndex</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">Keys
+</span><a href="#local-6989586621679029100"><span class="hs-identifier hs-var">keys</span></a></span><span class="hs-special">]</span><span> </span><span class="hs-glyph">|</span><span> </span><span id="local-6989586621679029104"><span class="annot"><span class="annottext">Token
+</span><a href="#local-6989586621679029104"><span class="hs-identifier hs-var">queryIndex</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">Keys
+</span><a href="#local-6989586621679029101"><span class="hs-identifier hs-var">queries</span></a></span><span class="hs-special">]</span><span>
 </span><span id="line-251"></span></pre></body></html>

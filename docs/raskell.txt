@@ -8,7 +8,7 @@
 --   Learn" by Zhou et al. For more information, see the README at
 --   <a>https://github.com/charlesfrye/raskell#readme</a>.
 @package raskell
-@version 0.0.0.1
+@version 0.0.0.2
 
 
 -- | This module provides the core of the RASP-L language.
@@ -72,7 +72,7 @@ maxKQV :: Keys -> Queries -> Predicate -> Values -> Sequence
 -- | Performs Key-Query-Value lookup with minimum aggregation of values.
 minKQV :: Keys -> Queries -> Predicate -> Values -> Sequence
 
--- | Compareis pairs of elements from sequences with a predicate subject to
+-- | Compares pairs of elements from sequences with a predicate subject to
 --   a causal constraint.
 selectCausal :: Keys -> Queries -> Predicate -> Selector
 
@@ -164,6 +164,24 @@ argmax :: Sequence -> Sequence
 -- | Computes the indices of the running minimum values in a
 --   <a>Sequence</a>.
 argmin :: Sequence -> Sequence
+
+-- | Computes the number of previous tokens in a <a>Sequence</a> that are
+--   equal to each <a>Token</a> from <a>Queries</a>.
+numPrev :: Sequence -> Queries -> Sequence
+
+-- | Returns 1s where the <a>Token</a> from the <a>Queries</a> has been
+--   seen before in the <a>Sequence</a>.
+hasSeen :: Sequence -> Queries -> Sequence
+
+-- | Finds the first occurrence of each query token in a <a>Sequence</a>.
+firsts :: Token -> Sequence -> Queries -> Sequence
+
+-- | Finds the last occurrence of each query token in a <a>Sequence</a>.
+lasts :: Token -> Sequence -> Queries -> Sequence
+
+-- | Selects the tokens from a <a>Sequence</a> at the indices provided by
+--   another sequence.
+indexSelect :: Token -> Sequence -> Sequence -> Sequence
 leq :: Token -> Token -> Bool
 geq :: Token -> Token -> Bool
 lt :: Token -> Token -> Bool
@@ -182,4 +200,4 @@ where' :: [Bool] -> Sequence -> Sequence -> Sequence
 --   a sequence.
 --   
 --   Provided for compatibility with Listing 3.
-sample_autoregressive :: Token -> (Sequence -> Sequence) -> Sequence -> Word8 -> Sequence
+sampleAutoregressive :: Token -> (Sequence -> Sequence) -> Sequence -> Word8 -> Sequence
