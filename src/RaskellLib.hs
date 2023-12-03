@@ -28,7 +28,7 @@ module RaskellLib
 
     -- * Compatibility
     where',
-    sample_autoregressive,
+    sampleAutoregressive,
   )
 where
 
@@ -143,5 +143,5 @@ sample endOfSequence prog xs n
 -- | Greedily and autoregressively sample the output of a RASP-L program on a sequence.
 --
 -- Provided for compatibility with Listing 3.
-sample_autoregressive :: Token -> (Sequence -> Sequence) -> Sequence -> Word8 -> Sequence
-sample_autoregressive = sample
+sampleAutoregressive :: Token -> (Sequence -> Sequence) -> Sequence -> Word8 -> Sequence
+sampleAutoregressive = sample
